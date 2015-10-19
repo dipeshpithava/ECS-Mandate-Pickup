@@ -1,0 +1,44 @@
+/************fonts*************/
+@font-face {
+	font-family: 'aniversitalic';
+    src: local('Anivers Italic'), local('Anivers_Italic'), url(../fonts/anivers_italic-webfont.woff) format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'aniversregular';
+    src: local('Anivers Regular'), local('Anivers_Regular'), url(../fonts/Anivers_Regular-webfont.woff) format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+	font-family: 'aniversbold';
+    src: local('Anivers Bold'), local('Anivers_Bold'), url(../fonts/anivers_bold-webfont.woff) format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoRegular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(../fonts/roboto-regular-webfont.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoMedium';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Semibold'), url(../fonts/roboto-medium-webfont.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoBold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(../fonts/roboto-bold-webfont.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoLight';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Light'), local('Roboto-Bold'), url(../fonts/roboto-light-webfont.woff) format('woff');
+}

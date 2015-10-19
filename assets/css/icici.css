@@ -1,0 +1,1107 @@
+/****mobile header css starts****/
+
+header{ width:100%; background-color:#cf0e21; height:70px; color:#fff; border-bottom:1px solid #ca0d1f; transition:all 0.5s ease 0s; z-index:999;}
+
+header .inner_header{ width:1024px; margin:0 auto; padding:0px 0; }
+
+header .inner_header .logo{ cursor:pointer; width:250px; display:inline-block; height:70px; margin:0px 0; background:url(../images/myuniverse-logo.png) no-repeat center center; background-size:73%}
+
+header nav{ width: 700px; float:right; padding:0px 0; margin:0px 0;display:inline-block;}
+
+header nav ul{ margin:0; padding:0; list-style:none; text-align:right;}
+
+header nav ul li { display:inline-block; height:70px; line-height:70px; vertical-align:top;}
+
+header nav ul li a{ margin:0; padding:0px 10px; color:#fff; font-size:12px; font-weight:500;display:inline-block; text-transform:uppercase;}
+
+header nav ul li:hover{ background-color:#d6192c;}
+
+header nav ul li:last-child a{ margin:0; padding:7px 10px; color:#cf0e21; font-size:13px; font-weight:500;  border:2px solid #fac51a; border-radius:3px; line-height:15px;}
+
+header nav ul li:nth-child(4):hover{ background-color:#cf0e21;}
+
+header nav ul li:nth-child(4) a:hover{ text-decoration:none; background-color:#fff; color:#cf0e21; }
+
+header nav ul li:nth-child(4) a{ margin:0 5px 0 0; padding:7px 10px; color:#fff; font-size:13px; font-weight:500;  border:2px solid #fff; border-radius:3px; line-height:15px;}
+
+header nav ul li:last-child:hover{ background-color:#cf0e21;}
+
+header nav ul li:last-child a:hover{ text-decoration:none; background-color:#fff; color:#cf0e21; border:2px solid #fff; }
+
+.sticky{ width:100%; background-color:#cf0e21; height:70px;transition:all 0.5s ease 0s;position:fixed; top:-100px; background-color:WHITE; color:#333; border:1px solid #fff; z-index:9999;
+
+}
+
+.sticky .inner_header{cursor:pointer; width:1024px; margin:0 auto; padding:0px 0; }
+
+.sticky .inner_header .logo{ width:250px; display:inline-block; height:70px; margin:0px 0;background: url(../images/logo_red.png) no-repeat center center;}
+
+.sticky nav{ width: 700px; float:right; padding:0px 0; margin:0px 0;display:inline-block;}
+
+.sticky nav ul{ margin:0; padding:0; list-style:none; text-align:right;}
+
+.sticky nav ul li { display:inline-block; height:70px; line-height:70px; vertical-align:top;}
+
+.sticky nav ul li a{ margin:0; padding:0px 10px; color:#cf0e21; font-size:12px; font-weight:500;display:inline-block; text-transform:uppercase;}
+
+.sticky nav ul li a:hover{ color:#fff;}
+
+.sticky nav ul li:hover{ background-color:#d6192c;color:#fff;}
+
+.sticky nav ul li:last-child a{ margin:0; padding:7px 10px; color:#cf0e21; font-size:13px; font-weight:500;  border:2px solid #fac51a; border-radius:3px; line-height:15px; background-color:#fac51a;}
+
+.sticky nav ul li:nth-child(4):hover{ background-color:#fff;}
+
+.sticky nav ul li:nth-child(4) a:hover{ text-decoration:none; background-color:#cf0e21; color:#fff; }
+
+.sticky nav ul li:nth-child(4) a{  margin:0 5px 0 0; padding:7px 15px; color:#cf0e21; font-size:14px; font-weight:500;  border:2px solid #cf0e21; border-radius:3px; line-height:15px;}
+
+.sticky nav ul li:last-child:hover{ background-color:#fff;}
+
+.sticky nav ul li:last-child a:hover{ text-decoration:none; background-color:#cf0e21; color:#fff; border:2px solid #cf0e21; }
+
+.zipsip_main_container{ width:100%; margin:0 auto; padding:0;}
+
+.zipsip_section1{ background-color:#cf0e21; width:100%; height:480px; background:url(../images/pattern.jpg) repeat 0 0 #cf0e21 ; text-align:center;background-attachment: fixed;
+
+}
+
+ 
+
+/**************mobile header css*****************/
+
+.header { width:100%; background-color:#c61c2c; margin:0 auto; height:70px; overflow: hidden}
+
+.header_inner{ padding:10px 5px;}
+
+.header .menu {background: url(../images/mf__icons.png) no-repeat 0 -75px; width:50px;            height:30px; margin-top:5px; float:left; cursor:pointer;}
+
+.header .logo{ max-width:280px; height:auto; float:left; padding:0px 0 0 10px;}
+
+.header .logo img{ width:62%;}
+
+.header .cart {background: url(../images/mf__icons.png) no-repeat -53px -75px; width:45px; height:56px; float:right; cursor:pointer;}
+
+.header .cart.one-click { background-position:-270px -171px; margin-left:5px; height:48px}
+
+.header .cart span{ background-color: #ffa500; border-radius: 18px; color: #000; display: block; height: 18px; position: absolute; width: 18px; text-align:center; font-size:12px;}
+
+.menu_open { width:300px; position:absolute; left:-310px; top:0; height:100%; background-color:#c61c2c; z-index:999999999;}
+
+.menu_open ul, .one-click-menu ul{ width:100%; margin:0px 0; padding:0; list-style:none;}
+
+.menu_open ul li, .one-click-menu ul li{font-size: 16px; text-align: left; border-top: 1px solid #c84747; color: #fff; background-image: url(../images/arrow_right1.png); background-repeat: no-repeat; background-position: 280px center;       float:left;             width:100%;}
+
+.menu_open ul li a, .one-click-menu ul li a{display: block; font-size: 15px; text-align: left; color: #fff;        padding:5px 45px 5px 10px;}
+
+.menu_open ul li:first-child, .one-click-menu ul li:first-child { background-image: none !important;background-position: 260px center;}
+
+.menu_open ul li:first-child a, .one-click-menu ul li:first-child a { width:160px; display:inline-block;}
+
+.menu_open ul li:first-child span.close, .one-click-menu ul li:first-child span.close { float:right; display:inline-block; padding:8px 10px 0; cursor:pointer;}
+
+.menu_open ul li h1{ background-color:#9a0019; font-size:13px; text-transform:uppercase; background-image:none; border-top:1px solid #b32632; margin:0; padding:5px 0 5px 10px; color:#fff; display:block;}
+
+.menu_open ul li.martop{ margin-top:10px; background-image:none;}
+
+.menu_open ul li h2{ background-image:none; margin:0; padding:10px 0 15px 10px; color:#fff; display:block; font-weight:500; text-align:left;}
+
+.menu_open ul li.bg_no { background-image:none !important;border-top: 1px solid #c61c2c;}
+
+.menu_open ul li.yellow_clr, .one-click-menu ul li.yellow_clr { background: url(../images/right_arrow_red.png) no-repeat 280px center #ffc000;}
+
+.menu_open ul li.yellow_clr a, .one-click-menu ul li.yellow_clr a { color:#cc2e27;}
+
+.menu_open ul li h2 a.open_acc_btn{ background-color:#f9c519; font-size:12px; color:#cc3333; width:200px; display:inline-block; text-align:center; text-transform:uppercase; padding:10px 0; border-radius:2px;}
+
+.menu_open ul li h2 a.login_btn{ background-color:inherit; font-size:12px; color:#fff; width:65px; display:inline-block; text-align:center; text-transform:uppercase; padding:8px 0; border:2px solid #fff; border-radius:2px;}
+
+.menu_open ul li h2 a.login_btn2{ background-color:inherit; font-size:12px; color:#fff; width:170px; display:inline-block; text-align:center; text-transform:uppercase; padding:8px 0; border:2px solid #fff; border-radius:2px;}
+
+.menu_open ul li h3{ background-image:none; margin:5px 0 0; padding:5px 0px 5px 10px; color:#fff; display:block; font-weight:500; text-align:left;}
+
+.menu_open ul li h3 span.pic{ width:40px; height:40px; line-height:40px; border-radius:40px; background-color:#fff; overflow:hidden; display:inline-block; text-align:center; vertical-align:middle;}
+
+.menu_open ul li h3 span.user_name{ width:150px; display:inline-block; font-size:13px; vertical-align:middle; word-wrap:break-word;font-weight:300; line-height:16px;}
+
+.text_14{ font-size:15px; font-weight:500;}
+
+.menu_open ul li h3 a.login_btn{ background-color:inherit; font-size:12px; color:#fff; width:65px; display:inline-block; text-align:center; text-transform:uppercase; padding:8px 0; border:2px solid #fff; border-radius:2px; vertical-align:middle;}
+
+/*********one click menu********/
+
+.one-prtfl-menu {width:300px; position:absolute; top:0; right:-301px; height:100%; background-color:#fff; z-index:999999999;}
+
+.one-click-menu ul li:first-child {line-height: 43px; padding: 0px 0px 0px 11px; width:96%; border-top:none; border-bottom:1px solid #B7B7B7}
+
+.one-click-menu ul li:first-child span.close {padding: 0px 5px 4px 20px;}
+
+.one-click-menu ul li a { padding:10px 45px 10px 10px; color:#333}
+
+.one-click-menu ul li { color:#333; border-color:#b7b7b7; background-image:url(../images/arrow_right-click.png);border-top:none; border-bottom:1px solid #B7B7B7}
+
+/*******************************/
+
+.P-overlay{width:100%; height:100%; background:rgba(255,255,255,0.6); position:fixed; z-index:9999999; top:0;}
+
+.menu_icons {background-image: url(../images/mf__icons.png); background-repeat: no-repeat; width:35px; height:34px; display:inline-block; vertical-align:middle;}
+
+.icon_in_mf {background-position: -5px -144px;}
+
+.icon_zip_sip {background-image: url(../images/zip_zip.png); background-repeat: no-repeat; background-position: 0px 0; width:40px; height:34px; display:inline-block; vertical-align:middle;}
+
+.icon_in_sip {background-position: -51px -144px; height:28px;}
+
+.icon_in_click {background-position: -100px -142px;        height:28px;}
+
+.icon_in_elss {background-position: -225px -181px;height:30px;}
+
+.icon_myinv{background-position: -151px -140px;height:34px;}
+
+.icon_login {background-position: -197px -141px; height:28px;}
+
+.icon_op_acc {background-position: -240px -140px; height:30px;}
+
+.icon_kyc {background-position:-278px -142px; height:26px;}
+
+.icon_his {           background-position: -9px -190px; height:28px;}
+
+.icon_invest {background-position: -47px -186px; height:26px;}
+
+.icon_contact {background-position: -92px -184px; height:26px;}
+
+.icon_share {background-position: -131px -184px; height:26px;}
+
+.icon_feedback {background-position: -173px -184px;    height:26px;}
+
+.scrollbox {overflow-y: scroll;      width: 300px !important; height: 100% !important;padding-right:0 !important}
+
+.vertical-track {width: 8px; background-color: #000}
+
+.vertical-handle {width: 8px; background-color: #ccc;}
+
+/****mobile header css ends ****/
+.hide-in-desktop{ display:none;}
+
+* { margin:0; padding:0}
+.clear { clear:both}
+.lflt { float:left}
+.rflt { float: right}
+ul li { list-style-type:none}
+.chosen-search { display:none!important}
+input[type="button"]:focus { outline:0; border:none}
+.modal-backdrop.in { opacity:.85}
+ 
+ 
+.container { width:999px; margin:0 auto; padding-left:0!important; padding-right:0!important;}
+.form-control {position: relative; display: block; padding: 2px 8px!important; height: auto; border-radius: 3px; background-color: #fff; -webkit-box-shadow: inset 0 1px 5px rgba(0,0,0,.1); -moz-box-shadow: inset 0 1px 5px rgba(0,0,0,.1); box-shadow: inset 0 1px 5px rgba(0,0,0,.1); border: 1px solid #d2d2d2; background-clip: padding-box; color: #444; text-decoration: none; line-height: 23px; height:29px; border:1px solid #d6d6d6; font-size:13px; height:29px!important;}
+.btn-border-btn {background: none; border: 2px solid #333333; font-size: 13px;  padding: 8px 20px; color: #333; display: inline-block; border-radius: 3px;}
+.btn-invest {background: #c51c2c; border: 0; padding: 12px 63px; font-size: 15px; color: #fff; border-radius: 5px; margin-left: 15px;}
+.portfolio-panel { background:#fafafa; padding:40px 0 18px}
+.error-txt {font-size:11px; color:red; font-family:Arial, Helvetica, sans-serif; text-align:left; margin-left:79px}
+/****************** zipbanner***********************/
+.zipsip_section1{ background-color:#cf0e21; width:100%; background:url(../images/pattern.jpg) repeat 0 0 #cf0e21 ; text-align:center;background-attachment: fixed;}
+.zip_sip_logo img{           width: auto; max-width:100%;max-height:100%}
+.inner_content{ width:1024px; margin:0 auto; padding:0;}
+.pad50{ padding:60px 0;}
+.zipsip_section1 .zip_sip_logo{ display:block; width:12%; text-align:center; margin:0 auto;}
+.zipsip_section1 h1{ font-size:45px; margin:10px 0; color:#fff; padding:0; text-align:center; font-weight:500; line-height:40px;}
+.zipsip_section1 p.start_cnt{ margin:0px 0; padding:0; font-size:18px; text-align:center; color:#fff;}
+.zipsip_section1 a.start_zs_btn{ padding:8px 65px; color:#fac51a; border:3px solid #fac51a; border-radius:40px; font-size:20px;text-transform:uppercase; background-color:#cf0e21; display:inline-block; margin:30px auto; font-weight:700;transition: all 0.5s ease 0s;}
+.zipsip_section1 a.start_zs_btn:hover{ background-color:#fac51a; color:#cf0e21;}
+ 
+/*******************/
+/********for postlogin**********/
+.welcome-wrapper { background:#3f3f3f;}
+.user-name { overflow:hidden; width:180px; height:30px; white-space:nowrap; }
+.user-name, .logout { float: right; padding:5px 10px;}
+.logout { border-right:1px solid #333; border-left:1px solid #333; margin-left:10px}
+.user-name a, .logout a { color:#fff;font-family: 'robotoregular'; font-size:13px}
+.user-name a:hover, .logout a:hover { text-decoration:none}
+ 
+/********header**********/
+.headerWrapper { width:100%; background:#c61c2c; padding:11px 0}
+.logo { float: left}
+.email-info {float: left;margin-right:23px; margin-top:2px}
+.cell-info { float: left}
+.customer-panel { color:#fff; margin-top:9px; float: right}
+.customer-panel .cont-no { font-size:13px; font-family:'robotoregular'}
+.customer-panel .time-copy {font: italic 13px/23px 'robotolight'; color:#fff}
+.customer-panel .link { color:#fff; font-family:'robotoregular'; font-size:13px}
+.customer-panel a.link:hover {text-decoration:underline}
+.alert-error {font-size: 11px; position: relative; top: 2px; color: #FD1D31; line-height: 13px; text-align: left;display: block; white-space:normal}
+.alert-error.info-txt { color:#fff}
+.email-icon, .cell-icon { position:relative; top:-1px}
+.man-star {font-size:11px; color:#FD1D31}
+.invest-block { width:100%; display:block; margin-bottom:0}
+.invest-block .chosen-container { width:100%!important;}
+.invest-block .chosen-container-single .chosen-single {height: 43px; color: #000; font-size: 25px; line-height: 31px; font-weight: bold; padding: 5px 5px;}
+.invest-block .chosen-container-single .chosen-single span { text-align:left}
+.invest-block .chosen-container-single .chosen-single div { top:10px; height:50%}
+.invest-block .chosen-container .chosen-drop { background:rgba(255,255,255,.7);}
+.invest-block .chosen-container .chosen-results li { font-size:15px; line-height:22px; text-align: left}
+.modeText { font-size:22px; color:#333333; text-align:center; font-family:'robotoregular'; margin-top:50px; font-weight:normal}
+ 
+ 
+/***************banner*********/
+.bannerWrapper { background:#000410 url(../images/banner-bg.jpg) no-repeat 50% 50%; background-size: cover; color:#fff}
+.bannerPanel { /*width:839px;*/ margin:0 auto; padding:9% 0px 12%; text-align:center;}
+.h1-heading { text-align:center; font: 35px/40px 'robotolight'; width:73%; margin:0 auto }
+.h2-heading {font: 36px/17px "robotobold"; text-align: center; margin: 2% auto 2%; width: 78%;}
+.h4-heading {font: 13px/17px 'robotoregular'; text-align: center; margin:5% auto 2%; width: 78%;}
+.bannerPanel .investor-panel {background: none repeat scroll 0% 0% rgba(6, 7, 6, 0.5); border-radius: 5px; padding: 9px 15px 15px; margin: 0px auto;
+box-shadow: 0px 5px 1px 0px rgba(0, 0, 0, 0.5); display: inline-block;}
+.investor-panel .investorInfo li { display:inline-block; float:left; font: 13px 'robotoregular'; margin: 0 12px 0 12px; width: 244px;}
+.investor-panel .investorInfo li.last { margin-right:0}
+.investor-panel .investorInfo li .form-input {border:1px solid #d6d6d6; display: inline-block; width:95%; border-radius:3px; float:left; margin-top:2px}
+.click-note { background:url(../images/click-note.png) no-repeat 0 0; position:absolute; top:0; width:274px; height:65px; left:-261px}
+.close-icn {position: relative; top: 62px; left: 82px; cursor:pointer}
+ 
+.information { position:relative; margin-bottom:6px; cursor:pointer; text-align:left}
+.information .copy-info { opacity:0; display:none; background:#fff; border-radius:3px; border:1px solid #cecece; color:#868686; font-size:11px; padding:5px; position:absolute; top:-78px}
+.information:hover .copy-info { opacity:1; display:block}
+.down-arow {bottom:-9px; position:absolute; left:5px}
+ 
+/*******recommend wrapper*********/
+.recommend-wrapper .container { position:relative; padding-bottom:22px}
+.down-arrow {position: absolute; top: -29px; width: 63px; height: 63px; left: 47%;}
+.question-icon {position:relative; padding-bottom:55px; background:#ededed}
+.question-icon .down-arrow.question-pic { width:79px; height:79px; left:48%}
+ 
+/****************portfolio CSS**************/
+.con-icon, .mod-icon, .agg-icon { background:url(../images/sprite.png) no-repeat 0 0;width: 36px; height: 36px; display: inline-block; float: left; margin-right: 5px; position: relative; top: -6px;}
+.mod-icon { background-position:-53px 0}
+.agg-icon { background-position:-102px 0}
+ 
+.tab-list-panel { width:660px; margin:0 auto}
+.tab-list-panel .nav-tabs { border-bottom:0}
+.tab-list-panel .nav-tabs > li > a { color:#fff; font: 15px 'robotoregular'}
+.tab-list-panel .nav-tabs > li.active > a, .tab-list-panel .nav-tabs > li.active > a:hover, .tab-list-panel .nav-tabs > li.active > a:focus { background-color: #c71c2c; color: #fff; border: 0; border-bottom:3px solid #b10f1a; text-align:left}
+.tab-list-panel .nav-tabs > li > a { border-bottom:3px solid #7a7a7a}
+.tab-list-panel .nav-tabs > li > a { background:#999999; padding:16px 37px; border: 0;}
+.tab-list-panel .nav-tabs > li > a.first, .tab-list-panel .nav-tabs > li.active > a { border-radius: 5px 0 0 5px;}
+.tab-list-panel .nav-tabs > li > a.second { border-radius:0; padding:16px 56px}
+.tab-list-panel .nav-tabs > li > a.last { border-radius: 0px 5px 5px 0px; padding:16px 67px}
+ 
+.tab-list-panel .nav-tabs > li > a { border-radius:0}
+.tab-list-panel .nav > li > a:hover, .nav > li > a:focus {background-color: #c71c2c; border-bottom:3px solid #b10f1a!important}
+.tab-list-panel .nav-tabs > li > a { margin-right:0; }
+.tab-list-panel .nav-tabs > li > a.second, .tab-list-panel .nav-tabs > li.active > a.second {border:1px solid #868686; border-top:0; border-bottom:3px solid #b10f1a}
+.tab-list-panel .nav-tabs > li > a.second { border-bottom:3px solid #7a7a7a}
+.tab-list-panel .nav-tabs > li > a { border-bottom:3px solid #7a7a7a}
+.tab-cont-panel.tab-content { padding-top:16px; overflow:visible}
+.fund-name { text-align:center}
+ 
+/*******************************************/
+ 
+/*******col-one**********/
+.demo-list { position:relative; top:-16px}
+.col-one { margin:10px auto 30px; padding-top:4px; width:881px;}
+.col-one .fund-name { font-size:18px; color:#333; font-family:'robotomedium'; text-align:center; font-weight:normal;
+margin-bottom:0; margin-top:52px}
+.break-line { margin:15px auto; width:160px; border-top:1px solid #cccccc;}
+.col-one.second-col { margin-bottom:0}
+.col-one.third-col { padding-top:0; margin-top:0; text-align: right}
+.bws-fund { text-align: right; color:#006ea3; text-decoration:underline; font-size:11px; font-family:'robotoregular'; margin:0px 23px 0 0px; position:relative; top:2px}
+.col-one .h5-heading { font-family:'robotoregular'; font-size:15px; text-align:center; margin:0; font-weight:normal; color:#666}
+.schedule-btn { margin:0 auto 10px; width:423px; }
+.bchedule-btn { margin:0px auto 10px; width:423px; }
+.schedule-btn .btn-sched { background:#c71c2c; border-radius:5px; font-size:16px; width:100%; cursor:pointer; text-align: center;color:#fff; font-family:Arial, Helvetica, sans-serif; font-weight:bold; padding:12px; border:0;}
+ 
+.col-big-panel { background:#f5f4f4; padding:22px 22px 31px;}
+.fund-ful-col { width:268px; border-radius:4px; float:left; margin-right:16px;}
+.fund-info-panel { border-radius:3px;}
+.fund-info-panel:hover {box-shadow:0px 0px 10px 0px #999; cursor:pointer; transition:all .2s ease}
+.fund-info-panel.active-shadow {box-shadow:0px 0px 10px 0px #999; border:1px solid red}
+.fund-ful-col.last { margin-right:0}
+.fund-ful-col .coln-ful-first { background:#e54c58; font-family:'robotoregular'; padding:10px; text-align:center; color:#fff; font-size:11px}
+.fund-ful-col .coln-ful-first a {color:#fff}
+.fund-heading { width:230px; font-size:15px; line-height:18px; overflow: hidden; text-overflow:ellipsis; font-weight:normal; margin:0 auto; text-align:center; color:#fff; margin-bottom:15px}
+.risk-text { font-size:13px; margin-top:10px;}
+.break-line.red-border { border-color:#eb9ea4; margin-top:2px; margin-bottom:2px}
+.read-more { color:#fff; text-decoration: none}
+.read-more:hover { color:#fff; text-decoration:underline}
+ 
+.col-second {padding:15px 12px; border:1px solid #e9e7e7; font-family:'robotoregular'; font-size:13px; color:#999999; background:#fff}
+.col-second .chosen-container { font-family:'robotoregular';width:101px!important}
+.col-second .chosen-container-single .chosen-single { width:90px; line-height:23px; box-shadow: inset 0 1px 1px rgba(0,0,0,.1)}
+.col-second .chosen-drop { width:90px!important}
+.col-second .tenure { width:109px; margin:0 auto 10px; white-space:nowrap;}
+.col-second .tenure.tenure-block {width:130px; float:left; margin:0}
+.tenure + .tenure { width:102px}
+.tenure + .tenure.tenure-block {width:102px; float:left;}
+.col-second .tenure .form-input { width:90px}
+.fund-info-panel .col-second .sip-date { margin-top:6px}
+.fund-info-panel .col-second .sip-date li { float:left;}
+.fund-info-panel .col-second .sip-date li a { font-size:12px; color:#666666; font-family:'robotoregular'; padding:5px 10px; border:1px solid #d6d6d6; border-right:0; text-decoration:none;}
+.fund-info-panel .col-second .sip-date li a.active { background:#ebeaea}
+.fund-info-panel .col-second .sip-date li a.first {border-radius:4px 0px 0px 4px}
+.fund-info-panel .col-second .sip-date li a.last { border-right:1px solid #d6d6d6; border-radius:0 4px 4px 0px}
+.fund-info-panel .tenure-sip { margin:0 auto}
+.fund-info-panel .tenure-sip.sip-period {              float:left; margin:20px 0px; width:100%}
+.fund-info-panel .tenure-sip p {margin-bottom:4px}
+.fund-part-name { font-family:'robotoregular'; font-size:11px}
+ 
+.form-control.alertactive { border:1px solid #fd1d31!important}
+ 
+/******Css for checkbox************/
+.demo-list { text-align:center;margin: -16px auto; position: relative; top: 0px; width: 45px;}
+.icheckbox_square-blue { display: inline-block; *display: inline; vertical-align: middle; margin: 0; padding: 0; width: 33px; height: 39px; background: url(../images/blue.png) no-repeat; border: none; cursor: pointer;}
+.icheckbox_square-blue {background-position: 0 0;}
+    .icheckbox_square-blue.hover {background-position: -36px 0;}
+    .icheckbox_square-blue.checked {background-position: -36px 0;}
+    .icheckbox_square-blue.disabled {background-position: -0px 0; cursor: default;}
+    .icheckbox_square-blue.checked.disabled {background-position: -41px 0;}
+.confirm-cond { font-size:12px; margin:10px 0 0; padding:0 20px 20px; width:487px; margin:0 auto; text-align:center}
+ 
+/****************Start Date week select CSS***********/
+.start-dt-panel { width:626px; margin:0 auto; padding: 25px 0}
+.start-dt-panel p.gray-txt { text-align:center; font-family:'robotoregular'; font-size:15px; color:#333333; margin-bottom:15px}
+.start-dt-panel .col-second .sip-date { margin-top:12px}
+.start-dt-panel .col-second .sip-date li { display:inline-block}
+.start-dt-panel .col-second .sip-date li a { font-size:12px; color:#666666; font-family:'robotoregular'; padding:5px 10px; border:1px solid #d6d6d6; text-decoration:none; margin-left:-4px}
+.start-dt-panel .col-second .sip-date li a.active { background:#ebeaea}
+.week-panel { float:left; width:150px;text-align:center}
+.week-txt { font-size:13px; color:#666; margin:5px 0; display:block }
+               
+/***************Fund-Week CSS********************************/
+.week-wrap { border:1px solid #d1cfcf; border-radius:4px; background:#fff; padding:10px 10px 0; box-shadow: 0 2px 5px #f1f1f1; position: absolute; top:100px; width: 710px}
+.week-wrap .top-arrow {position: absolute; top:-8px; left:60px; width:15px; height:15px}
+.week-fnd-days { margin-bottom:0}
+.week-panel { position:relative}
+.week-fnd-days li { display:inline-block; padding:2px 10px 2px 0; margin-right:15px; border-bottom:1px solid #d1cfcf; width:334px; color:#666; font-size:11px}
+.week-fnd-days li.third,.week-fnd-days li.four { border-bottom:0}
+.week-fnd-days li.second, .week-fnd-days li.four { margin-right:0;}
+.fund-date { margin-right:15px; float:left}
+.fund-logo { float:left; margin-right:10px;}
+.fund-w-name {font-weight: normal; text-align: left; display: block; width: 220px; height: 18px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: inline-block;}
+.fund-week-panel.third-fund .week-wrap { left:-262px; }
+.fund-week-panel.four-fund .week-wrap { left:-411px}
+.fund-week-panel.third-fund .top-arrow { left:48%}
+.fund-week-panel.four-fund .top-arrow { right:-29%}
+               
+/***********************************/
+/**************************************************/
+ 
+/*******Disclaimer*******/
+.col-one.forth-col { padding:0px 15px 2px; font-family:'robotoregular'; font-size:13px; color:#666666}
+.col-one.forth-col .chosen-container { width:150px!important; font-family:'robotoregular'}
+.col-one.forth-col .marg-btm { margin-bottom:3px}
+.col-one.forth-col label { font-weight:normal}
+.col-one.forth-col input[type="radio"], input[type="checkbox"] { position:relative; top:2px}
+.break-line.big {width:50%; margin:47px auto 34px;}
+.col-one.forth-col .checkbox { position:relative; top:0px; margin:0}
+ 
+.ptfl-btn .btn-sched { background:#c71c2c; border-radius:5px; font-size:16px; width:100%; cursor:pointer; text-align: center;color:#fff; font-family:Arial, Helvetica, sans-serif; font-weight:bold; padding:12px; border:0;}
+ 
+/***********form*************/
+.sip-panel { width:88%; margin:0 auto;}
+.sip-panel .h1-heading { text-align:center; font: 40px/40px 'robotolight'; width:600px; margin:0 auto;color:#000}
+.sip-panel .h4-heading { font: 15px/20px 'robotomedium'; text-align:center; margin:13px auto; width:90%; color:#fff; position:relative}
+.sip-panel .investor-panel { position:relative; padding:20px 15px;border-radius: 6px; background: rgba(255,255,255,0.1); filter: alpha(opacity=80); color: #fff; text-align: left;}
+.sip-panel .investor-panel .investorInfo li {margin: 0 20px 0 0px; width: 197px;}
+.sip-panel .investor-panel .investorInfo li.last { margin-right:0}
+.sip-panel .investor-panel .investorInfo li .form-input {border:1px solid #d6d6d6; display: inline-block; width:95%; border-radius:3px; float:left; margin-top:2px}
+/*****btn******/
+.ptfl-btn { margin:0 auto; width:495px; margin-top:0px; position:relative}
+.ptfl-btn .btn-sched { font-weight:normal; font-size:15px}
+ 
+ 
+.separator-ct {width: 100%; overflow: hidden; position: relative; margin-bottom:40px}
+.separator-ct .container {height: 100%; text-align: center;}
+.separator-bg {position: absolute; height: 100%; width: 100%; background-position: 0 0; -webkit-background-size: cover; -moz-background-size: cover; background-size: cover; background-repeat:repeat; background-attachment:fixed; z-index:0;}
+.border-box { width:50px; height:50px; border-radius:50px; position:relative; z-index:99}
+/*.separator-ct .container {padding:42px 0 0px}*/
+.separator-ct .span-2 { margin-top:80px; height:100px}
+.bottom-logo { position:relative; top:80px}
+/****************************/
+ 
+/***********General questions**********/
+.question-wrapper { background:#ededed}
+.question-wrapper .h2 { font-family: 'robotolight'; text-align:center; margin-top:0; margin-bottom:25px}
+.question-list li {height: 73px; line-height:73px; float: left; background: #dfdede; margin-right: 15px; text-align: center; margin-bottom: 14px; border-radius: 4px;  }
+.question-list li a { padding: 17px; line-height:16px!important; width: 318px;color: #336699; font-family:'robotomedium'; font-size:13px; vertical-align:middle; line-height:18px; display: inline-block}
+.question-list li a:hover {text-decoration: none;}
+.question-list li:hover, .question-list li.active-tab { background-color:#c6c6c6}
+#wrap { position:relative}
+.arrow-up {position: absolute; top: -9px;}
+.widget-container {display: none;position: absolute; background: #fff; border: 1px solid #cac8c8; border-radius: 4px; width: 354px; padding: 10px 15px; top: 81px; font-size: 11px; box-shadow:0 3px 8px 0px #A0A0A0; font-family:'robotoregular'}
+.widget-container.second { left:331px}
+.widget-container.third-panel { left:666px}
+.widget-container.four-panel { left:0px; top:167px}
+.widget-container.fifth-panel { left:331px; top:167px}
+.widget-container.six-panel { left:666px; top:167px}
+.widget-container .close {position: absolute; top: 7px; right: 5px;}
+.widget-container.active {display:block !important;}
+/**************************************/
+ 
+ 
+/************modal-popup-css*************/
+.popup-sip .modal-body .close { opacity: 1; filter: alpha(opacity=100); padding:10px 10px; font-size:12px; color:#666; border-radius:4px}
+.popup-sip .modal-body { padding:20px; float:left}
+.popup-sip .modal-body .h5 { font-size:15px; font-family:'robotoregular'; font-weight:normal}
+.popup-sip .modal-body .fund-list { border:1px solid #c9c8c8; float:left}
+.popup-sip .modal-dialog { width:889px}
+.popup-sip .modal-content { float:left; margin-top:85px}
+ 
+.popup-sip .fund-list-header li { background:#f4f4f4; text-align:center; padding:12px 25px; float:left; font-family:'robotoregular'; color:#6a6a6a; font-size:12px; border:1px solid #c8c8c8;
+border-top:0; border-left:0; display:inline-block}
+.popup-sip .fund-list-header li.firstl, .selected-fund-list .col-list-first { width:90px;}
+.popup-sip .fund-list-header li.secondl, .selected-fund-list .col-list-second { width:349px;}
+.popup-sip .fund-list-header li.thirdl, .selected-fund-list .col-list-third { width:160px;}
+.popup-sip .fund-list-header li.fourl, .selected-fund-list .col-list-four { width:104px;}
+.popup-sip .fund-list-header li.fifthl, .selected-fund-list .col-list-fifth { width:122px; border-right:0}
+ 
+.selected-fund-list .col-list-first, .selected-fund-list .col-list-second, .selected-fund-list .col-list-third, .selected-fund-list .col-list-four, .selected-fund-list .col-list-fifth { font-size:13px; font-family:'robotoregular'; float:left; text-align: center; padding:15px 20px;}
+.selected-fund-ful-col { float:left; width:825px}
+.selected-fund-list .col-list-second { text-align:left; font-family:'robotobold'}
+.selected-fund-list li { border-bottom:1px solid #c8c8c8; float:left}
+ 
+.btn-confirm-grp { margin-top:10px; float: right}
+.btn-confirm-grp .btn-border-btn { font-size:16px; font-family:'robotobold'; padding:6px 35px; border-radius:5px}
+.btn-confirm-grp .btn-invest { font-size:16px; font-family:'robotomedium'; padding:8px 35px; }
+/*************************************************/
+ 
+/***********Thank you popup css***********/
+.bank-dtl-panel { font-size:13px; color:#393939; font-family:'robotobold'; margin-top:15px}
+.bank-dtl-panel .h6-small { font-size:11px; position:relative}
+.bank-dtl-panel .search-panel { font-family:'robotoregular'}
+.dtl-txt { opacity:0; display:none; position: absolute; width: 168px; top: 22px; left: 0; background: #fff;
+box-shadow: 0 1px 2px 0 #666; z-index:1; border: 1px solid #ccc; padding: 5px; border-radius: 4px; font-size: 11px;}
+.h6-small { display:inline-block; cursor:pointer}
+.h6-small:hover .dtl-txt { opacity:1; display: block}
+.label-field { width:230px; margin-right:16px; float:left}
+.label-field + .label-field + .label-field { width:150px}
+.label-field + .label-field + .label-field + .label-field { margin-right:0}
+.bank-form { margin-bottom:7px}
+.contact { width:641px}
+.pin-code { width:150px}
+.bank-form .form-control { font-family:'robotoregular'}
+ 
+.success-message .h4 {font-size: 1.6em;  color:#393939; font-family:'robotoregular'; font-size:13px; font-weight:normal; }
+.submit-btn .alert-message { margin:5px 8px 5px}
+.ok-sign { text-align: center;width:510px; margin: 0 auto;}
+.ok-btn { width:220px; margin:25px auto 0}
+.ok-btn .btn-invest { border-radius:3px}
+.ok-btn a:hover { color:#fff; text-decoration:none}
+.thank { font-size:27px; font-family:'robotoregular'; color:#0C0C0C; text-align:center; line-height:28px; margin:5px 0 20px}
+.success-message .btn-invest { padding:5px 22px;; margin-top:10px; margin-left:0;display: block; text-align: center;}
+/***autofill Search css**********/
+.ui-autocomplete { z-index:9999!important}
+/********************/
+/***************************************/
+ 
+ 
+/********select Alert***********/
+.select-alert { background:#ffffcc; padding:10px; position:fixed;  bottom:0; width:100%; font-family: 'robotoregular'; color:#333; font-size:13px; text-align:center}
+ 
+/*****read-more*******/
+.read-more { width:650px;}
+.read-more .modal-body .close {background: url(../images/close-icon.png) no-repeat 0 0; width: 45px; height: 45px; opacity: 1; top: -38px; position: relative; right: -35px;}
+.read-more .modal-body .h5 {color: #393939; font-family: 'robotoregular'; font-size: 13px; font-weight: normal; text-align:center}
+.read-more .modal-content { margin-top:85px}
+/***********************/
+ 
+.fund-dtails-panel .h5-heading { color:#c42d36; font-weight:normal; font-family: 'robotoregular'; margin-bottom:3px; font-size:14px}
+.fund-dtails-panel .h6, h6 { font: 12px 'robotoregular'; color:#404040; margin-top:2px; margin-bottom:15px; }
+.investment-tbl { border:1px solid #cbcca4; border-radius:4px; margin-top:6px}
+.investment-tbl .tbl-head { background:#ededed;  font-family:'robotobold' }
+.investment-tbl tr td { padding:6px 10px; border:1px solid #cbcca4; text-align:center; color:#000000;font-family: 'robotoregular'; font-size:13px; background:#f7f7f7; text-align:center }
+.investment-tbl tr td:first-child { text-align:left; padding-left:35px; padding-right:35px}
+.investment-tbl tr td.tbl-heading { font-family:'robotobold';}
+.fund-dtails-panel .small { font-size:11px; text-align:right; color:#000; font-family: 'robotoregular';}
+ 
+/*********sticky css***********************/
+.menu-secondary-wrap { background:#000;width: 100%; position: absolute; visibility: hidden; opacity: 0; z-index:1001;}
+.menu-secondary-wrap .container.sticky-bar { width:750px;}
+.tab-list-panel.sticly-tab .nav-tabs > li { margin-bottom:0}
+.tab-list-panel.sticly-tab { width:423px; float:right}
+.tab-list-panel.sticly-tab .nav-tabs > li > a { padding: 10px 25px}
+.tab-list-panel.sticly-tab .nav-tabs > li > a { font-size:18px}
+.tab-list-panel.sticly-tab .nav-tabs > li > a { background:none; border:0}
+.tab-list-panel.sticly-tab .nav-tabs > li.active > a, .tab-list-panel.sticly-tab .nav-tabs > li.active > a:hover, .tab-list-panel.sticly-tab .nav-tabs > li.active > a:focus { background:#c61c2c; border:0; border-radius:0}
+.tab-list-panel.sticly-tab .nav > li > a:hover, .tab-list-panel.sticly-tab .nav > li > a:focus { border-bottom:0!important}
+.tab-list-panel.sticly-tab .nav-tabs > li.active > a, .tab-list-panel.sticly-tab .nav-tabs > li.active > a:hover, .tab-list-panel.sticly-tab .nav-tabs > li.active > a:focus { padding:10px 25px; border:0}
+.investorInfo.fund-amt-panel { width:289px; float: left; margin-bottom:0}
+.investorInfo.fund-amt-panel li { float:left; width: 125px; }
+.investorInfo.fund-amt-panel li:first-child { width:100px; margin-right:15px}
+.invest-block.fund-amt .chosen-container-single .chosen-single { background:none; color:#fff; font-size:18px; font-weight:normal; border: none; box-shadow:none}
+ 
+ 
+input.bb {width:142px;height:142px; visibility:hidden;}
+.radio-box { width: 28px; height: 28px; display:block; background: url(../images/blue.png) no-repeat 0 0;z-index:1; cursor:pointer; margin:0 auto}
+.radio-box.check{ background:url(../images/blue.png) no-repeat -36px 0;}
+ 
+ 
+/***************New css for sign in sign up form*************/
+.signin-container {width: 495px; font-family: Arial, verdana, Helvetica, sans-serif; color:#6a6a6a; font-size: 13px; margin: 0 auto}
+/*LINK CSS*/
+.signin-container a {color: #224a88; text-decoration: none;}
+.signin-container a:focus,.signin-container a:hover {text-decoration: underline;-webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out; -ms-transition: all 0.5s ease-in-out;}
+/*INSVESTMENT SPECIFIC BUTTONS*/
+.signin-container .btn-danger {color: #ffffff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #c51c2c; *background-color: #c51c2c;  background-image: -moz-linear-gradient(top, #c51c2c, #bb1724); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#c51c2c), to(#bb1724)); background-image: -webkit-linear-gradient(top, #c51c2c, #bb1724); background-image: -o-linear-gradient(top, #c51c2c, #bb1724); background-image: linear-gradient(to bottom, #c51c2c, #bb1724); background-repeat: repeat-x; border-color: #adb2b7; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc51c2c', endColorstr='#ffbb1724', GradientType=0); filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);}
+.signin-container .btn-danger:hover,
+.signin-container .btn-danger:focus,
+.signin-container .btn-danger:active,
+.signin-container .btn-danger.active,
+.signin-container .btn-danger.disabled,
+.signin-container .btn-danger[disabled] {color: #ffffff; background-color: #bb1724; *background-color: #c51c2c;}
+.enter-login-details {width: 602px; overflow: hidden;}
+.titled_boxed_content3 {border: 1px solid #adb2b7;width:495px;margin: 5px auto 5px;
+background:#fff; -webkit-border-radius: 8px 8px 8px 8px; -moz-border-radius: 8px 8px 8px 8px; border-radius: 8px 8px 8px 8px; -webkit-box-shadow: 0px 0px 10px 0px #cccccc; -moz-box-shadow: 0px 0px 10px 0px #cccccc;
+box-shadow: 0px 0px 10px 0px #cccccc;}
+.titled_boxed_content3 .heading3 {border-bottom: 1px solid #989898; text-align:center; color:#6a6a6a; text-transform: none; font-weight:bold; font-size: 16px; font-family: Arial, Helvetica, sans-serif;
+  height:45px; line-height: 45px; padding-left: 18px; padding-right: 18px; padding-bottom: 0; background: #d9dee3; background-color: #d7dce2; *background-color: #d7dce2; background-image: -moz-linear-gradient(top, #d0d6dd, #eaebef); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d0d6dd), to(#eaebef)); background-image: -webkit-linear-gradient(top, #d0d6dd, #eaebef); background-image: -o-linear-gradient(top, #d0d6dd, #eaebef);
+  background-image: linear-gradient(to bottom, #d0d6dd, #eaebef); background-repeat: repeat-x; border-color: #e4e7eb #e4e7eb #e4e7eb; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd0d6dd', endColorstr='#ffeaebef', GradientType=0); filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  -webkit-border-radius: 8px 8px 0px 0px;/*do this change for signup pages too*/
+     -moz-border-radius: 8px 8px 0px 0px;/*do this change for signup pages too*/
+          border-radius: 8px 8px 0px 0px;/*do this change for signup pages too*/
+   /*margin-bottom:5px;*/
+   text-shadow:1px 1px 1px #ffffff;
+}
+.titled_boxed_content3 .heading3 i{
+  font-size: 20px;
+}
+ 
+.titled_boxed_content3 .box-info {
+   padding:25px 0px 0px 0px;
+   /* Box Shadow will not work in IE 8 and IE 7*/
+   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.titled_boxed_content3 .box-info .form_container {padding: 0px 0 30px; position: relative}
+ 
+.form_container div.input_group_seperator{
+  margin-bottom:14px;
+}
+.titled_boxed_content3 input[type="text"],.titled_boxed_content3 input[type="password"]
+{
+  width: 400px;
+border: 1px solid rgb(214, 214, 214);
+padding: 7px 12px;
+border-radius: 3px;
+}
+/*.titled_boxed_content3 input[type="text"]:focus,.titled_boxed_content3 input[type="password"]:focus
+{
+  color: #000;
+  font-weight: bold;
+  font-size: 15px;
+  outline:none;
+}*/
+.titled_boxed_content3 .email-container {
+  margin: 0 auto;
+    width: 400px;
+}
+.titled_boxed_content3 label{
+  cursor: default;
+  margin-bottom: 0;
+}
+.titled_boxed_content3 .input-append .add-on,
+.titled_boxed_content3 .input-prepend .add-on {
+    border: medium none;
+    color: #6A6A6A;
+    display: inline-block;
+    font-size: 19px;
+    font-weight: normal;
+    height: auto;
+    line-height: 22px;
+    margin-right: -44px;
+    margin-left:1px;
+    margin-top: 1px;
+    min-width: 16px;
+    padding: 14px;
+    position: relative;
+    text-align: center;
+    float:left;
+    text-shadow: 0 1px 0 #FFFFFF;
+    width: 43px;
+    z-index: 99;
+}
+.titled_boxed_content3 .input-append:focus .add-on {
+  background-color: #f2f0f0;
+}
+.titled_boxed_content3 .input-prepend i.ok-icon, .titled_boxed_content3 .input-prepend i.remove-icon  { position: absolute; right: 15px; top: 6px;}
+.titled_boxed_content3 .content_with_button {font-size: 11px; overflow: hidden;/* to avoid content going outta this box*/}
+.titled_boxed_content3 .content_with_button div{
+  float:left;
+  width:429px;
+  margin-right:15px;
+  line-height: 1.3em;
+}
+.titled_boxed_content3 .content_with_button .btn{
+  width:423px;
+  height:44px;
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0 auto;
+  margin-top: 4px !important;
+  color:#fff;
+}
+.titled_boxed_content3 .content_with_button .btn:focus {
+    outline: medium none;
+}
+.titled_boxed_content3 .content_with_button .btn:active
+{
+       background-color: #942A25;
+    box-shadow: 0 4px 8px #333333 inset;
+}
+.titled_boxed_content3 .check-box-content {
+font-size: 11px;
+    overflow: hidden;
+    padding: 9px 100px 0 0;
+}
+.titled_boxed_content3 .check-box-content input[type="checkbox"]{
+  margin-top: 1px;
+  margin-top:-2px\9; /*to avoid error in ie*/
+  margin-right:5px;
+}
+.verification-image {
+    width: 400px;
+}
+/*PASSWORD CONTAINER*/
+.password-container {
+border-top: 1px solid #EEEFF0;
+    display: block;
+    margin: 10px auto 0;
+    padding: 20px 46px 0;
+    width: auto;
+}
+.password-container .verification-image img {
+  margin:0 auto;
+  display: block;
+  padding:1px;
+  background: #fff;
+  border:1px solid #B8BDC3;
+  box-shadow: 0 0 2px #CCCCCC;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+.password-container .verification-title {
+  text-align: center;
+  font-style: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color:#2d2d2d;
+  margin:3px 0 3px 0;
+}
+.password-container .help-text
+{
+    line-height:15px;
+  color: #7e7e7e;
+  font-size: 11px;
+  margin-bottom: 23px;
+  width:405px;
+}
+ 
+.password-container .use-virtual-keyboard {
+  font-size: 12px;
+}
+.titled_boxed_content3 .use-virtual-keyboard {
+   font-size: 11px;
+    margin-bottom:15px;
+    overflow: hidden;
+    padding: 2px 3px 0 0;
+}
+.titled_boxed_content3 .use-virtual-keyboard input[type="checkbox"]{
+  margin-top:1px;
+  margin-top:-2px\9; /*to avoid error in ie*/
+  margin-right:5px;
+}
+.titled_boxed_content3 .login-now{
+clear: both;
+position: relative;
+    z-index: 999;
+}
+ 
+ 
+.titled_boxed_content3 .heading4{
+  background:url(../images/heading4_bg.png) no-repeat center;
+  color:#cf2134;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  width: 345px;
+  margin-top:41px;
+  margin-bottom:27px;
+}
+.signin-container .forgot-password {
+  font-size: 12px;   margin: 5px 0 0;
+}
+ 
+/*****************mobile CSS start******************/
+ 
+@media only screen and (max-width: 1200px) and (min-width: 1024px) {
+                .fund-ful-col { width:219px}              
+}
+ 
+@media only screen and (max-width: 800px) and (min-width: 768px) {
+.hide-in-mobile{ display:none;}
+.container { width:750px;}
+.fund-list-header { display:none}
+.showIpad { display:block!important}
+.noMobile { display:none}
+.selected-fund-list .col-list-first { display:none}
+.tab-list-panel { width:535px}
+.last-mob { margin-right:0}
+ 
+ .bannerPanel { /*width:548px*/}
+.bannerPanel .investor-panel { width:100%}
+.down-arrow { left:45%}
+ .fund-ful-col { width:215px}
+.col-one { width:721px}
+.fund-info-panel .col-second .sip-date li a {padding: 5px 8px}
+ .fund-heading { width:185px;}
+.col-big-panel { /*width:618px;*/ margin:0 auto}
+.fund-ful-col { /*width:279px;*/ margin-bottom:16px}
+.col-big-panel li:nth-child(2n + 2) { margin-right:0}
+.col-big-panel li:nth-of-type(3) { margin-right:16px}
+.sip-panel .investor-panel .investorInfo li { margin-bottom:15px; width:48%}
+.sip-panel .investor-panel .investorInfo li:nth-child(2n + 2) { margin-right:0}
+ 
+ /********modal-css********/
+.popup-sip .modal-dialog { width:668px}
+.popup-sip .fund-list-header li.secondl, .selected-fund-list .col-list-second { width:218px;}
+ .selected-fund-ful-col { width:604px}
+ /******Form*******/
+.sip-panel .investor-panel .investorInfo li.second, .sip-panel .investor-panel .investorInfo li.last { margin-bottom:0}
+ 
+/********bank details popup********/
+.success-message { width:600px}
+.bank-form li.label-field, .label-field + .label-field + .label-field { width:292px}
+ .bank-form li.label-field:nth-child(2n+2) { margin-right:0}
+.bank-form li.label-field:nth-of-type(5){ width:47%}
+.contact { width:100%}
+ /***********fund-week*******/
+.week-wrap { width:359px; z-index:9999}
+ .week-fnd-days li { padding:5px 0}
+.week-fnd-days li.third { border-bottom:1px solid #d1cfcf}
+}
+@media only screen and (max-width: 767px) {
+
+.bchedule-btn { width:90%; margin:0 5%}
+.hide-in-mobile {display:none}
+.hide-in-desktop {display: block}
+
+
+/**header***/
+ /********header******/
+
+  header.mobile-header { background:#fff}
+
+  header.mobile-header .logo {cursor:pointer;width:140px; display: inline-block; margin: 0px; background: url("../images/myuniverse-logo.png";) no-repeat scroll center center transparent; margin: 10px 0 0px 10px;}
+
+  header.mobile-header .logo img { width:auto; max-height:100%; max-width:100%}
+
+  .P-overlay{width:100%; height:100%; background:rgba(255,255,255,0.6); position:fixed; z-index:9999999; top:0;}
+
+    .mobile-header .menu {background: url("../images/mf__icons.png";) no-repeat scroll 0px -75px transparent; width: 33px; height: 30px; margin-top: 23px; float: left; cursor: pointer;}
+
+  .menu_open { width:300px; position:absolute; left:-310px; top:0; height:100%; background-color:#c61c2c; z-index:999999999;}
+
+.menu_open ul, .one-click-menu ul{ width:100%; margin:0px 0; padding:0; list-style:none;}
+
+.menu_open ul li, .one-click-menu ul li{font-size: 16px; text-align: left; border-top: 1px solid #c84747; color: #fff; background-image: url(../images/arrow_right1.png); background-repeat: no-repeat; background-position: 280px center;       float:left;             width:100%; line-height:30px}
+
+.menu_open ul li a, .one-click-menu ul li a{display: block; font-size: 15px; text-align: left; color: #fff;        padding:5px 45px 5px 10px;}
+.menu_open ul li a:hover, .one-click-menu ul li a:hover { text-decoration:none}
+.menu_open ul li:first-child, .one-click-menu ul li:first-child { background-image: none !important;background-position: 260px center;}
+
+.menu_open ul li:first-child a, .one-click-menu ul li:first-child a { width:215px; display:inline-block;}
+.menu_open ul li:first-child a img, .one-click-menu ul li:first-child a img { width:auto; max-width:100%; max-height:100%}
+
+.menu_open ul li:first-child span.close, .one-click-menu ul li:first-child span.close { float:right; display:inline-block; padding:0px 10px 5px; cursor:pointer;}
+
+.menu_open ul li h1{ background-color:#9a0019; font-size:13px; text-transform:uppercase; background-image:none; border-top:1px solid #b32632; margin:0; padding:0px 0 0px 10px; color:#fff; display:block;}
+
+.menu_open ul li.martop{ margin-top:10px; background-image:none;}
+
+.menu_open ul li h2{ background-image:none; margin:0; padding:10px 0 15px 10px; color:#fff; display:block; font-weight:500; text-align:left;}
+
+.menu_open ul li.bg_no { background-image:none !important;border-top: 1px solid #c61c2c;}
+
+.menu_open ul li.yellow_clr, .one-click-menu ul li.yellow_clr { background: url(/images/right_arrow_red.png) no-repeat 280px center #ffc000;}
+
+.menu_open ul li.yellow_clr a, .one-click-menu ul li.yellow_clr a { color:#cc2e27;}
+
+.menu_open ul li h2 a.open_acc_btn{ background-color:#f9c519; font-size:12px; color:#cc3333; width:200px; display:inline-block; text-align:center; text-transform:uppercase; padding:10px 0; border-radius:2px;}
+
+.menu_open ul li h2 a.login_btn{ background-color:inherit; font-size:12px; color:#fff; width:65px; display:inline-block; text-align:center; text-transform:uppercase; padding:8px 0; border:2px solid #fff; border-radius:2px;}
+
+.menu_open ul li h2 a.login_btn2{ background-color:inherit; font-size:12px; color:#fff; width:170px; display:inline-block; text-align:center; text-transform:uppercase; padding:0; border:2px solid #fff; border-radius:2px;}
+
+.menu_open ul li h3{ background-image:none; margin:5px 0 0; padding:5px 0px 5px 10px; color:#fff; display:block; font-weight:500; text-align:left;}
+
+.menu_open ul li h3 span.pic{ width:40px; height:40px; line-height:40px; border-radius:40px; background-color:#fff; overflow:hidden; display:inline-block; text-align:center; vertical-align:middle;}
+
+.menu_open ul li h3 span.user_name{ width:150px; display:inline-block; font-size:13px; vertical-align:middle; word-wrap:break-word;font-weight:300; line-height:16px;}
+
+.text_14{ font-size:15px; font-weight:500;}
+
+.menu_open ul li h3 a.login_btn{ background-color:inherit; font-size:12px; color:#fff; width:65px; display:inline-block; text-align:center; text-transform:uppercase; padding:8px 0; border:2px solid #fff; border-radius:2px; vertical-align:middle;}
+
+.mobile-icon { float:left; margin:2% 3%}
+
+.menuIcon span{background: #CC3342; display: block; float: left; height: 4px; margin: 0 0 5px; width: 100%; border-radius:5px}
+
+.close-txt { margin-left:10px}
+/****************************************/
+ 
+.container { width:319px;}          
+ .col-list-first, .popup-sip .fund-list-header li.firstl, .fund-list-header { display:none}
+.noMobile { display:none}
+.form-control { height:16px; padding:6px 12px}
+  .inner_content { width: 80%}
+  .zipsip_section1 h1 { font-size: 25px; line-height: 30px}
+.zipsip_section1 p.start_cnt { font-size: 15px}
+.cell-icon, .email-icon { top:0}
+  .zipsip_section1 .zip_sip_logo { width: 42%}
+               
+ .logo { float:none; text-align:center}
+.customer-panel { float:none; text-align:center}
+.email-info { float:none; margin-right:0}
+.cell-info { float:none; margin-top:5px}
+.col-one .fund-name { font-size:25px}
+.col-one .h5-heading { width:100%}
+ .header { text-align:center;}
+.success-message { padding:0}
+.bannerWrapper { padding-bottom:0px; background-position: center center}
+.bannerPanel { width:318px; padding-bottom:10px}
+.h1-heading { width:301px; font-size:19px; line-height:21px}
+.h4-heading { font:11px/13px "robotoregular"}
+.bannerPanel .investor-panel { width:72%; padding-top:15px; padding-bottom:15px; margin:20px auto 0}
+.investor-panel .investorInfo li { width:198px; margin-right:18px; margin-bottom:8px}
+.investor-panel .investorInfo li.second { margin-right:0}
+ .down-arrow { left:40%; display:none}
+ .col-one { width:310px; padding-top:10px}
+.fund-ful-col, .fund-ful-col.last { float:none; margin: 0 auto 30px}
+.schedule-btn { width:300px}
+.col-big-panel { padding:22px 15px 10px}
+ .popup-sip .modal-dialog { width:290px}
+.selected-fund-ful-col { width:220px}
+.selected-fund-list li {padding-bottom: 7px; padding-top: 7px;}
+.selected-fund-list .col-list-first, .selected-fund-list .col-list-second, .selected-fund-list .col-list-third, .selected-fund-list .col-list-four, .selected-fund-list .col-list-fifth { padding:3px 10px; width:100%; text-align:left!important}
+.btn-confirm-grp .btn-invest { padding: 8px 15px;}
+.btn-confirm-grp .btn-border-btn {padding: 6px 15px;}
+ .popup-sip .modal-content { margin-top:20px}
+ 
+.col-big-panel { height:auto}
+ 
+ .col-one.third-col { text-align:center}
+ .col-one.forth-col .chosen-container {/*left: 85px; margin-top: -22px;*/ position: relative;}
+.tab-list-panel .nav-tabs > li > a { padding:10px 16px} 
+.tab-list-panel .nav-tabs > li.active > a, .tab-list-panel .nav-tabs > li.active > a:hover, .tab-list-panel .nav-tabs > li.active > a:focus { padding:10px 16px}
+ 
+.tab-list-panel { width: auto; margin-top:15px}
+ 
+.sip-panel { width:290px}
+.sip-panel .investor-panel { width:228px; margin:0 auto}
+.sip-panel .investor-panel .investorInfo li { margin-bottom:7px}
+.ptfl-btn { width:290px}
+.question-icon .down-arrow.question-pic { left:}
+.tab-cont-panel.tab-content { padding-top:10px}
+ 
+/********Bank dtails Popup**********/
+.label-field { width:224px; margin-bottom:5px}
+.label-field + .label-field + .label-field { width:224px}
+.label-field + .label-field + .label-field + .label-field { margin-right:0}
+.bank-form { width:250px}
+.success-message { width:225px}
+.ok-sign { width:222px; text-align:left}
+ 
+/***********fund-week******/
+.week-wrap { position:relative; top:0; z-index:9999}
+.week-panel { width:100%; margin-bottom:10px}
+.week-wrap { width:271px}
+.start-dt-panel { width:300px}
+.week-fnd-days li { padding:5px 10px 5px 0}
+.week-fnd-days li, .fund-date { width:100%}
+.fund-w-name { width:184px}
+.week-wrap .top-arrow { left:48%}
+.week-fnd-days li.third { border-bottom:1px solid #d1cfcf}
+.fund-week-panel.four-fund .week-wrap, .fund-week-panel.third-fund .week-wrap { left:0; text-align:left}
+.confirm-cond {width: 100%}
+.tab-list-panel .nav-tabs > li > a.second, .tab-list-panel .nav-tabs > li > a.last { padding:10px 16px}
+.tab-list-panel .nav-tabs > li > a.last {padding:10px 39px}
+ 
+}
+ 
+@media only screen and (max-width: 766px) and (min-width:640px) {
+                .col-one { width:587px}
+                .container {width:640px}
+                .tab-list-panel { width:450px}
+                .tab-list-panel .nav-tabs > li > a.first { padding:10px 42px!important}
+                .tab-list-panel .nav-tabs > li > a.second { padding:10px 37px!important}
+                .tab-list-panel .nav-tabs > li > a.last { padding:10px 60px!important}
+               
+   .inner_content { width: 85%; margin: 0 auto }
+  .zipsip_section1 h1 { font-size: 35px; line-height: 40px}
+  .zipsip_section1 .zip_sip_logo { width: 24%}
+  .zipsip_section1 p.start_cnt { font-size: 16px}
+ 
+                 
+}
+@media only screen and (max-width: 639px) and (min-width: 480px) {
+               
+.container { width:470px;}
+.col-list-first, .popup-sip .fund-list-header li.firstl { display:none}
+ .logo { float:none; text-align:center}
+.customer-panel { float:none; text-align:center}
+.email-info { float:none}
+.cell-info { float:none; margin-top:5px}
+ .header { text-align:center; padding:13px 0}
+ .bannerWrapper { padding-bottom:50px}
+.bannerPanel { width:460px; padding-bottom:10px}
+.bannerPanel .h1-heading { width:460px}
+.bannerPanel .investor-panel { width:51%; padding-top:15px; padding-bottom:15px}
+.investor-panel .investorInfo li { width:204px; margin-right:18px; margin-bottom:8px}
+.investor-panel .investorInfo li.second { margin-right:0}
+.tab-list-panel { width:385px}
+.fund-ful-col { width:269px}
+.sip-panel .investor-panel { width:95%}
+.sip-panel { width:99%}
+.sip-panel .investor-panel .investorInfo li { width:196px}
+.investor-panel .investorInfo li.date { margin-right:0}
+.investor-panel .investorInfo li.second { margin-right:20px}
+ .down-arrow { left:43%}
+.col-big-panel { height:auto} 
+ .col-one { width:449px}
+.fund-ful-col, .fund-ful-col.last { float:none; margin: 0 auto 30px}
+.col-one.forth-col .marg-btm { margin-bottom:10px}
+ .selected-fund-ful-col {width:387px}
+.popup-sip .modal-dialog { width:450px}
+.popup-sip .fund-list-header li { padding:12px 5px; font-size:11px}
+.selected-fund-list .col-list-first, .selected-fund-list .col-list-second, .selected-fund-list .col-list-third, .selected-fund-list .col-list-four, .selected-fund-list .col-list-fifth { padding:15px 5px}
+.selected-fund-list .col-list-four { width:98px;}
+.selected-fund-list .col-list-third { width:81px}
+.selected-fund-list .col-list-second { width:119px}
+.selected-fund-list .col-list-fifth { width:89px} 
+ .popup-sip .fund-list-header li.secondl { width:119px}
+.popup-sip .fund-list-header li.thirdl { width:95px}
+.popup-sip .fund-list-header li.fourl { width:70px}
+.popup-sip .fund-list-header li.fifthl { width:103px}
+ .btn-confirm-grp {float: left; margin: 10px 22px 0 81px; width: 228px;}
+ .col-one.forth-col .chosen-container {left:0; margin-top:0; position: relative;}
+  /*******thanks popup*********/
+.success-message { width:377px!important}
+.ok-sign { width: 375px}
+  /************Fund Week*************/
+.week-fnd-days li { text-align:left}
+.week-fnd-days li, .fund-date { margin-bottom:3px}
+.start-dt-panel { width:364px;}
+.week-panel { width:170px; margin-bottom:10px}
+.week-wrap { width:351px; z-index:1000}
+.week-fnd-days li { padding:7px 0 7px }
+.week-fnd-days li.third { border-bottom:1px solid #d1cfcf}
+.fund-week-panel.first-fund .top-arrow { left:20%!important;}
+.fund-week-panel.first-fund { top:3px}
+.fund-week-panel.second-fund { left:-170px; position:relative; top:3px}
+.fund-week-panel.second-fund .top-arrow { right:7%}
+.fund-week-panel.four-fund .week-wrap, .fund-week-panel.third-fund .week-wrap { left:-102%;}
+.fund-week-panel.third-fund .top-arrow, .fund-week-panel.first-fund .top-arrow { left:20%}
+.fund-week-panel.four-fund .top-arrow, .fund-week-panel.second-fund .top-arrow   { left:70%; right:-25%;}
+.tab-list-panel .nav-tabs > li > a.first {padding:10px 28px!important}
+.tab-list-panel .nav-tabs > li > a.last {padding:10px 51px!important}
+.tab-list-panel .nav-tabs > li > a.second {padding:10px 29px!important}
+.signin-container, .titled_boxed_content3, .ptfl-btn,.verification-image, .password-container .help-text,
+.titled_boxed_content3 .email-container {width: 98%; margin:0 auto 20px}
+.titled_boxed_content3 .heading3 {font-size: 13px;padding-left: 0;padding-right: 0;}
+.password-container { padding:20px 0 0}
+.error-field-password { width:98%; padding:0 37px}
+.titled_boxed_content3 .email-container {width:100%; padding:0 37px}
+.titled_boxed_content3 input[type="text"],.titled_boxed_content3 input[type="password"] { width: 100%}
+.titled_boxed_content3 .input-prepend i.ok-icon, .titled_boxed_content3 .input-prepend i.remove-icon { right:8px}
+ 
+  .inner_content { width:72%}
+  .bannerWrapper {padding-bottom: 0}
+}
+@media (max-width: 360px) {
+.signin-container, .titled_boxed_content3, .ptfl-btn,.verification-image, .password-container .help-text,
+.titled_boxed_content3 .email-container {width: 98%; margin:0 auto 20px}
+.titled_boxed_content3 .email-container {width: 98%; padding:0px 37px}
+.titled_boxed_content3 input[type="text"], .titled_boxed_content3 input[type="password"] { width:100%}
+.titled_boxed_content3 .heading3 {font-size: 1em;padding-left: 0;padding-right: 0;}
+.password-container { padding:20px 0 0}
+.error-field-password { width:98%; padding:0 37px}
+ 
+ 
+}
+ 
+ 
+/*******font Css*********/
+@font-face {
+    font-family: 'robotomedium';
+    src: url('../fonts/roboto-medium-webfont.eot');
+    src: url('../fonts/roboto-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/roboto-medium-webfont.woff') format('woff'),
+         url('../fonts/roboto-medium-webfont.ttf') format('truetype'),
+         url('../fonts/roboto-medium-webfont.svg#robotomedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'robotolight';
+    src: url('../fonts/roboto-light-webfont.eot');
+    src: url('../fonts/roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/roboto-light-webfont.woff') format('woff'),
+         url('../fonts/roboto-light-webfont.ttf') format('truetype'),
+         url('../fonts/roboto-light-webfont.svg#robotolight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'robotobold';
+    src: url('../fonts/roboto-bold-webfont.eot');
+    src: url('../fonts/roboto-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/roboto-bold-webfont.woff') format('woff'),
+         url('../fonts/roboto-bold-webfont.ttf') format('truetype'),
+         url('../fonts/roboto-bold-webfont.svg#robotobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'robotoregular';
+    src: url('../fonts/roboto-regular-webfont.eot');
+    src: url('../fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/roboto-regular-webfont.woff') format('woff'),
+         url('../fonts/roboto-regular-webfont.ttf') format('truetype'),
+         url('../fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+ 
+}
+/*************************************************/
+ 
+
+disabled {
+  color:rgba(255, 255, 255, 0.8) !important;
+  cursor: auto;
+  /*text-shadow: white 0 1px 0;*/
+  -webkit-box-shadow: white 0 1px 0 0 inset;
+  -moz-box-shadow: white 0 1px 0 0 inset;
+  -ms-box-shadow: white 0 1px 0 0 inset;
+  -o-box-shadow: white 0 1px 0 0 inset;
+  box-shadow: white 0 1px 0 0 inset;
+  font-weight:500;
+}
+.in-progress {
+      text-shadow: none;
+  background: -webkit-linear-gradient(-45deg, rgba(231, 100, 112, 0.8) 25%, transparent 25%, transparent 50%, rgba(231, 100, 112, 0.8) 50%, rgba(231, 100, 112, 0.8) 75%, transparent 75%, transparent), -webkit-linear-gradient(top, #c71c2c, #c71c2c);
+  background: -moz-linear-gradient(-45deg, rgba(231, 100, 112, 0.8) 25%, transparent 25%, transparent 50%, rgba(231, 100, 112, 0.8) 50%, rgba(231, 100, 112, 0.8) 75%, transparent 75%, transparent), -moz-linear-gradient(top, #c71c2c, #c71c2c);
+  background: -ms-linear-gradient(-45deg, rgba(231, 100, 112, 0.8) 25%, transparent 25%, transparent 50%, rgba(231, 100, 112, 0.8) 50%, rgba(231, 100, 112, 0.8) 75%, transparent 75%, transparent), -ms-linear-gradient(top, #c71c2c, #c71c2c);
+  background: -o-linear-gradient(-45deg, rgba(231, 100, 112, 0.8) 25%, transparent 25%, transparent 50%, rgba(231, 100, 112, 0.8) 50%, rgba(231, 100, 112, 0.8) 75%, transparent 75%, transparent), -o-linear-gradient(top, #c71c2c, #c71c2c);
+  background: linear-gradient(-45deg, rgba(231, 100, 112, 0.8) 25%, transparent 25%, transparent 50%, rgba(231, 100, 112, 0.8) 50%, rgba(231, 100, 112, 0.8) 75%, transparent 75%, transparent), linear-gradient(top, #c71c2c, #c71c2c);
+  -pie-background: linear-gradient(-45deg, rgba(231, 100, 112, 0.8) 25%, transparent 25%, transparent 50%, rgba(231, 100, 112, 0.8) 50%, rgba(231, 100, 112, 0.8) 75%, transparent 75%, transparent), linear-gradient(top, #c71c2c, #c71c2c);
+  background-repeat: repeat;
+  -webkit-background-size: 40px 40px, 100% 100%;
+  -moz-background-size: 40px 40px, 100% 100%;
+  -ms-background-size: 40px 40px, 100% 100%;
+  -o-background-size: 40px 40px, 100% 100%;
+  background-size: 40px 40px, 100% 100%;
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -moz-animation: progress-bar-stripes 2s linear infinite;
+  -ms-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}

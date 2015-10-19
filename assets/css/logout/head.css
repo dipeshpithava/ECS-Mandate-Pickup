@@ -1,0 +1,30 @@
+body{ margin:0; padding:0; font-family:Arial;}
+.header_black{  background: #3f3f3f none repeat scroll 0 0;
+    height: 36px;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    z-index: 100;
+	line-height:35px;
+}
+.inner_header{ width:100%; max-width:995px; margin:0 auto;}
+.right_top_links{ width:50%; margin:0; float:right;}
+.top_head_links{ margin:0; padding:0; list-style:none; text-align:right;}
+.top_head_links li{ height: 33px; display:inline-block; position:relative; vertical-align:middle; font-size:13px; border-right: 1px solid #4a4a4a;color:#fff; padding:0 10px}
+.top_head_links li a{ color:#fff; text-decoration:none; }
+
+
+.dropBox { margin-top: -1px; width:275px; position:absolute; border-left:1px solid #000000; border-bottom:1px solid #000000; border-right:1px solid #000000; background:#FFFFFF; line-height:15px;      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.675); }
+.dropBox .dropBoxIn { padding:10px 12px;}
+.dropBox .dropBoxIn .cntRow1 { padding:10px 12px;; border-bottom:1px solid #ddd; text-align:left}
+.dropBox .dropBoxIn .cntRow1 .iconrow { padding:0 0 3px 0}
+.dropBox .dropBoxIn .cntRow1 .iconrow .lefticon{ float:left;  }
+.dropBox .dropBoxIn .cntRow1 .iconrow .righticon{ float:left; margin:0 0 0 10px; color:#a7a7a7; font-weight:bold; width:80%;  }
+.dropBox .dropBoxIn .cntRow1 .iconrow .righticon .righticonI{ padding:6px 0 0 0}
+.dropBox .dropBoxIn .cntRow1 .txtrow { padding:0 0 6px 0; color:#3f3f3f;}
+.dropBox  .txtrow a { color:#395fb9; text-decoration:none}
+.dropBox .txtrow a:hover { color:#395fb9; text-decoration:underlin}
+.whiteB { background:#FFFFFF; color:#333333!important; padding:8px 10px; border-left:1px solid #000;  }
+.contactClick { padding:9px 10px;  }
+
+@media only screen and (max-width:680px) and (min-width:200px) { .header_black { display:none}  }
