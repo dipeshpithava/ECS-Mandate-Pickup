@@ -62,6 +62,8 @@
           
             return true;
         }
-
+<?php
+// echo "console.log('".$this->benchmark->memory_usage()."');";
+?>
         
     </script>

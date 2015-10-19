@@ -12,7 +12,7 @@
                       <th>DOB</th>
                       <th>Address</th>
                       <th>Pin</th>
-                      <th>Lnadmark</th>
+                      <th>Landmark</th>
                       <th>City</th>
                       <th>State</th>
                       <th>Date Of Pickup</th>

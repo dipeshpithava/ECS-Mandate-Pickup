@@ -556,6 +556,10 @@ $(document).bind('click', function(e){
         $(window).load(function(){
           window.history.forward();
         });
+
+        <?php
+        // echo "console.log('".$this->benchmark->memory_usage()."');";
+        ?>
 </script>
 </body>
 </html>

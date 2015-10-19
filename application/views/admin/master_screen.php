@@ -64,7 +64,7 @@
 	    $( "#pickup_date" ).datepicker({
 			dateFormat: "yy-m-dd",
 			minDate: 1,
-			maxDate: '+6m', 
+			maxDate: '7', 
 			changeMonth: true,
 			beforeShowDay: disabledays
 		});
@@ -286,12 +286,12 @@
 					<option value="accepted">Accepted</option>
 					<option value="mandate active">mandate active</option>
 				</select>
-				<select name="select_KYC" id="select_status">
+				<select disabled name="select_KYC" id="select_status">
 					<option>Select KYC</option>
 					<option value="yes">Yes</option>
 					<option value="no">No</option>
 				</select>
-				<select name='select_priority' id="select_priority">
+				<select disabled name='select_priority' id="select_priority">
 					<option value="">Select Priority</option>
 					<option value="high">High</option>
 					<option value="medium">Medium</option>

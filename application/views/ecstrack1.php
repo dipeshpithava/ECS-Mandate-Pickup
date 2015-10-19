@@ -88,7 +88,7 @@ if(count($all_status) > 0){
     }
     if($all_status_row->status == "rejected"){
       $rejected = @$all_status_row->date_time;
-      $status_heading = "Document was rejected";
+      $status_heading = "ECS Mandate Rejected";
     }
     if($all_status_row->status == "accepted"){
       $accepted = @$all_status_row->date_time;
@@ -294,12 +294,6 @@ if(count($all_status) > 0){
                 ?>
                 <div class="btn">
                   <p class="statusbtn">Successful</p>
-                  <!-- <span class="infoicon"></span>
-                  <div class="infopanel" id="item_1">
-                    <span class="closeicon"></span>
-                    <span class="ecscopy">ECS Activation Rejected</span>
-                    &nbsp;
-                  </div> -->
                 </div>
                 <?php
               }else if($rejected != ""){
@@ -449,6 +443,10 @@ $(document).ready(function(e) {
 $(window).load(function(){
           window.history.forward();
         });
+
+<?php
+echo "console.log('".$this->benchmark->memory_usage()."');";
+?>
 </script>
 </body>
 </html>

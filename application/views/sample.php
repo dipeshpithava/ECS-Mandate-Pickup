@@ -51,7 +51,7 @@
 	
 			<tr>
 				<td class="font_b">Investor Name: <input type="text" value="<?=$investor_details->name?>" name="" class="w-70"></td>
-				<td class="font_b">PAN No: <input type="text" name="" value="<?=$investor_details->panno?>" class="w-80"></td>
+				<td class="font_b">PAN No: <input type="text" name="" value="<?=strtoupper($investor_details->panno)?>" class="w-80"></td>
 			</tr>
 		</table>
 	</div>

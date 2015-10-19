@@ -58,7 +58,7 @@ $('#datepicker').datepicker({
     beforeShowDay: disabledays,  
     dateFormat: "yy/mm/dd",
     minDate: 1,
-	maxDate: '+6m', 
+	maxDate: '7', 
 	changeMonth: true
 });
 

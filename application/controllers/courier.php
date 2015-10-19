@@ -302,7 +302,8 @@ class Courier extends CI_Controller {
 					
 			}
 			//end
-			return json_encode(array("status" => "success", "message" => "All Set."));
+			$this->load->view("admin/courier_success");
+			// return json_encode(array("status" => "success", "message" => "All Set."));
 		} catch (Exception $e) {
 			print_r($e->getMessage());
 		}

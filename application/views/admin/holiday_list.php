@@ -97,7 +97,7 @@
               <div class="col-lg-12">
         				<input type="text" id="holiday_date" placeholder="YY/MM/DD"></input>
         				<input type="textarea" id="remark" placeholder="On Account Off"></input>
-        				<input type="button" id="insert_btn" value="Click"></input>
+        				<input type="button" id="insert_btn" value="Add New Holiday"></input>
                 <table cellspacing="0" id="display_table">
                   <thead>
                   <tr>
@@ -131,5 +131,6 @@
   </section>
 
   <?php include_once('includes/site_bottom_scripts.php'); ?>
+  
   </body>
 </html>

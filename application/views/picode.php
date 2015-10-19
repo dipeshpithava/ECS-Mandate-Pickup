@@ -48,12 +48,18 @@
 </section>
 
 <section class="ecs_form_main">
-	<div class="heading1 black_text">OOPS!</div>
+<?php
+  if(@$redirect_from == ""){
+    ?>
+    <div class="heading1 black_text">OOPS!</div>
     <p class="big_text">We have <span class="red">no courier service</span> at the pincode <span class="black_text1">‘<?php echo @$pin;?>’</span></p>
     <div class="line"></div>
+    <?php
+  }
+?>
   <div class="ecs_inner1">
     	<div class="heading2 mar0">Courier it YourselF &amp; win a Flipkart voucher </div>
-        <p class="big_text">Send your documents within 3 working days at the below mentioned mutual fund desk address and get a flipkart e-gift voucher of <span class="black_text1">Rs. 100</span></p>
+        <p class="big_text">Send your documents within 3 working days at the below mentioned address and win a Flipkart gift voucher worth <span class="black_text1">Rs. 100</span></p>
         <div class="flipkart_coupon"><img src="<?=base_url()?>assets/third_party/images/coupon.png" alt="Cooupoon"/> </div>
         <div class="heading2 text_lowercase mar0">Mutual Fund Desk Address</div>
          <p class="big_text">Aditya Birla Customer Services Limited, Unit No: 506, B-wing,  Cello Triumph,
@@ -61,7 +67,17 @@ I B Patel Road, Off W.E Highway, Goregaon (East), Mumbai - 400 063 501,</p>
    		<div class="form_field text_center">
         	<button class="btn_stye1 small_btn" id="step1_next">I will courier the documents</button>
         </div>
-        <a href="<?=base_url()?>home/schedule" class="back_link">Go Back and edit the pincode</a>
+        <?php
+        if(@$redirect_from != ""){
+          ?>
+          <a href="<?=base_url()?>home/land" class="back_link">Go Back to ECS mandate Home page</a>
+          <?php
+        }else{
+          ?>
+          <a href="<?=base_url()?>home/schedule" class="back_link">Go Back and edit the pincode</a>
+          <?php
+        }
+        ?>
 		<p id="confirm_msg"></p>
     </div>
     
@@ -178,8 +194,9 @@ $(document).ready(function(){
 					pass:""
 					},
 					success:function(akhi){
-						$(".back_link").html("");
-						$("#confirm_msg").html("u have confirmed your order");
+            location.assign("<?=base_url()?>home/thankyou");
+						// $(".back_link").html("");
+						// $("#confirm_msg").html("You have confirmed your order");
 						//alert(akhi);
 				}});
 		
@@ -189,6 +206,9 @@ $(document).ready(function(){
 $(window).load(function(){
           window.history.forward();
         });
+<?php
+// echo "console.log('".$this->benchmark->memory_usage()."');";
+?>
 </script>
 </body>
 </html>
