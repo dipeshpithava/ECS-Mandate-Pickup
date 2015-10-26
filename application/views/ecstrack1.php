@@ -276,6 +276,7 @@ if(count($all_status) > 0){
                   }else if($rejected != ""){
                     $date_5 = new DateTime(@$rejected);
                     $dt5 = $date_5->format('M j, Y');
+                    $add_gray = "gray";
                   }else{
                     $add_gray = "gray";
                   }

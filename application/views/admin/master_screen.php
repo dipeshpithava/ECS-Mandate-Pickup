@@ -64,7 +64,7 @@
 	    $( "#pickup_date" ).datepicker({
 			dateFormat: "yy-m-dd",
 			minDate: 1,
-			maxDate: '7', 
+			maxDate: '1m', 
 			changeMonth: true,
 			beforeShowDay: disabledays
 		});

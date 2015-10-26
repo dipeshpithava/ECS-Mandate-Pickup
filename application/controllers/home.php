@@ -34,7 +34,7 @@ class Home extends CI_Controller {
 			);
 			$this->db->where("investor_id", $this->session->userdata("investor_id"));
 			$this->db->update("ecs_status", $upd_data);
-			redirect("https://stg.adityabirlamoneyuniverse.com/schedule-ecs-pickup");
+			redirect("https://stg.adityabirlamoneyuniverse.com/schedule-ecs-pickup/home/schedule");
 		} catch (Exception $e) {
 			
 		}
@@ -633,6 +633,10 @@ class Home extends CI_Controller {
 	}
 
 	public function index(){
+		// $this->session->set_userdata('investor_id', 'ABMMU0008199');
+		// $this->session->set_userdata('email_id', 'easy7@tcs.com');
+		// redirect("home/land");
+		
 		if($this->input->post("SAMLResponse") == ""){
 			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
 			exit;
