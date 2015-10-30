@@ -7,7 +7,7 @@
 <link href="<?=base_url()?>assets/third_party/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?=base_url()?>assets/third_party/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<link href="<?=base_url()?>assets/css/nb_style.css?v=321" rel="stylesheet">
+<link href="<?=base_url()?>assets/css/nb_style.css?v=<?=date("Y_m_d_H_i_s")?>" rel="stylesheet">
 <style type="text/css">
 .no_display{
   display: none;
@@ -169,6 +169,23 @@ $(document).ready(function(){
 				}});
 		
 	});
+  $('.all-pro1').click(function(event){
+  event.stopPropagation();
+    $('.ul-productdrop').slideToggle();
+ });
+ $(document).click(function(){$('.ul-productdrop').fadeOut();});
+
+ $('.menu-fa').click(function(){
+  //alert('sjeet');
+  $('.ul-leftslide').fadeIn(function(){
+      $('.left-menu').animate({'left':'0%'});
+  })
+    
+ });
+ $('.ul-leftslide').click(function(){
+  $('.left-menu').animate({'left':'-100%'});
+  $(this).fadeOut();
+ });
 });
 
 $(window).load(function(){

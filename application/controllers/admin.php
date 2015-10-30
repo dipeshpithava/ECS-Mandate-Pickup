@@ -55,7 +55,7 @@ class Admin extends CI_Controller {
         // $this->email->to($investor->myuniverse_email_id);
 
         $this->email->subject('ECS Mandate');
-        $this->email->message($this->load->view("emailer/appointmentrec", $data, true));
+        $this->email->message($this->load->view("emailer/rejected", $data, true));
 
         $this->email->send();
 
@@ -259,8 +259,15 @@ class Admin extends CI_Controller {
 		}
 	}
 	public function send_courier(){
+		// $this->db->select('st.status as user_status, st.date_time,inv.*');
+		// $this->db->from('ecs_status st');
+		// $this->db->join('ecs_investors inv','st.investor_id=inv.invuser_id');
+		// $this->db->where(array('st.status' => 'courier myself'));
+		// $data["courier_send_list"] = $this->db->get()->result();
+		// $this->load->view('admin/courier_myself',$data);
+
 		$this->db->select('st.status as user_status, st.date_time,inv.*');
-		$this->db->from('ecs_status st');
+		$this->db->from('ecs_schedule_status_history st');
 		$this->db->join('ecs_investors inv','st.investor_id=inv.invuser_id');
 		$this->db->where(array('st.status' => 'courier myself'));
 		$data["courier_send_list"] = $this->db->get()->result();
@@ -651,11 +658,11 @@ class Admin extends CI_Controller {
 				break;
 
 			case 'accepted':
-				$txt = "Dear Customer, your mandate has been accepted by MyUniverse and is sent to ".$investor_detail->bankName." for their acceptance. The Mandate will be active after we receive the Bank’s feedback.";
+				$txt = "Dear Customer, your mandate has been accepted by MyUniverse and is sent to ".$investor_detail->bankName." for their acceptance. The Mandate will be active after we receive the Bank’s confirmation.";
 				break;
 
 			case 'mandate active':
-				$txt = "Congratulations!! Your mandate for ".$investor_detail->bankName." is active. You can schedule a SIP to be automatically deducted from this account.";
+				$txt = "Congratulations!! Your mandate for ".$investor_detail->bankName." is active. SIP can now be processed on this mandate.";
 				break;
 			}
 			return $txt;

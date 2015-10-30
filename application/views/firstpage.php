@@ -6,7 +6,7 @@
 <link href="<?=base_url()?>assets/css/style2.css?v=321" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/third_party/css/sweetalert.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/nb_style.css?v=321">
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/nb_style.css?v=<?=date("Y_m_d_H_i_s")?>">
 <style type="text/css">
   .no_display{
     display: none;
@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="yt-loader"></div>
-
+<?php include_once "logout_header.php"; ?>
 <!--header-->
 <section class="headerWrapper">
   <section class="container">
@@ -102,6 +102,19 @@ pick for me. </div>
 <script type="text/javascript">
 
 $(document).ready(function() {
+  $('#contact-us').click(function(event){event.stopPropagation();
+    $(this).css({'background' : '#fff','color' : '#000'});
+    $('.nb-absolutecon').fadeIn('slow');
+  });
+
+  $(document).click(function(){$('.nb-absolutecon').fadeOut(function(){$('#contact-us').css({'background' : 'transparent','color' : '#fff'})});});
+  $('.nb-absolutecon').click(function(event){event.stopPropagation();});
+
+  $('#contact-us').click(function(){
+    $(this).css({'background' : '#fff','color' : '#000'});
+    $('.nb-absolutecon').fadeIn('slow');
+  });
+  
 $('.courierSchedule').click(function() {
 		$('.courierSchedule .css-label').css('background-position', '0px -57px');
 		$('.courierECS .css-label').css('background-position', '0px 0px');
@@ -116,6 +129,23 @@ $("#courier_ecs").click(function(){
 $("#courierSchedule").click(function(){
  location.assign("<?=base_url()?>home/schedule"); 
 });
+ $('.all-pro1').click(function(event){
+  event.stopPropagation();
+    $('.ul-productdrop').slideToggle();
+ });
+ $(document).click(function(){$('.ul-productdrop').fadeOut();});
+
+ $('.menu-fa').click(function(){
+  //alert('sjeet');
+  $('.ul-leftslide').fadeIn(function(){
+      $('.left-menu').animate({'left':'0%'});
+  })
+    
+ });
+ $('.ul-leftslide').click(function(){
+  $('.left-menu').animate({'left':'-100%'});
+  $(this).fadeOut();
+ });
 });
 
 </script>

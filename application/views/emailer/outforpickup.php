@@ -180,7 +180,7 @@ a img {
    <td>
    <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
    <tr>
-      <td style="padding-top:0px;"><table width="600" border="0" cellspacing="0" cellpadding="0" style=" font-family:Arial, Helvetica, sans-serif; border:1px solid #b8b8b8" bgcolor="#fff">
+      <td style="padding-top:0px;"><table width="600" border="0" cellspacing="0" cellpadding="0" style=" font-family:Arial, Helvetica, sans-serif; border:1px solid #b8b8b8;margin:0px auto;display:block;" bgcolor="#fff">
           <tbody>
             <tr>
               <td height="25" style="text-align:center; font-size:12px; color:#444444">&nbsp;</td>

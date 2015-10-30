@@ -4,10 +4,94 @@ class Home extends CI_Controller {
 	public function __construct(){
 		date_default_timezone_set('Asia/Kolkata');
 		parent::__construct();
-
 		
+		define("ERR_DIR_DB", "/Users/itrs-190/Sites/ci/application/logs/err_DB.log");
+		define("ERR_DIR_EMAIL", "/Users/itrs-190/Sites/ci/application/logs/err_email.log");
+		define("ERR_DIR_SMS", "/Users/itrs-190/Sites/ci/application/logs/err_sms.log");
+		define("ERR_DIR_SAML", "/Users/itrs-190/Sites/ci/application/logs/err_saml.log");
+
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
+	}
+
+	private function log_error($error_level, $message){
+		switch($error_level){
+			case '0':
+				// If database insert / update fails.
+				error_log($message, 3, ERR_DIR_DB);
+				break;
+			case '1':
+				// If Email API fails
+				error_log($message, 3, ERR_DIR_EMAIL);
+				break;
+			case '2':
+				// If SMS API fails
+				error_log($message, 3, ERR_DIR_SMS);
+				break;
+			case '3':
+				// If SAML fails
+				error_log($message, 3, ERR_DIR_SAML);
+				break;
+		}
+	}
+
+	public function status_nohead(){
+		if($this->session->userdata('investor_id') == ""){
+			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
+			exit;
+		}
+
+		$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
+		if(count($data["all_status"]) < 1){
+			$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+		}
+		
+		$this->load->view("ecstrack_nohead", $data);
+	}
+
+	public function land_nohead(){
+		if($this->session->userdata('investor_id') == ""){
+			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+			exit;
+		}
+		$this->load->view("firstpage_nohead");
+	}
+
+	public function schedule_nohead(){
+		if($this->session->userdata('investor_id') == ""){
+			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+			exit;
+		}
+
+		$investor_id = $this->session->userdata('investor_id');
+		if($investor_id==""){
+			die("Not an Authenticated User.");
+		}
+
+		
+			$this->db->where("invuser_id",$investor_id);
+			$is_user_available = $this->db->get("ecs_investors")->result();
+			if(count($is_user_available) < 1){
+				$ins_log_data = array(
+					"email_id"    => $this->session->userdata('email_id'),
+					"investor_id" => $this->session->userdata('investor_id')
+				);
+				$this->db->insert("ecs_unknown_investors", $ins_log_data);
+				die("We are unable to retrive your data. Please schedule after some time.");
+			}
+			$this->db->where("investor_id",$investor_id);
+			$data["all_status"] = $this->db->get("ecs_status")->result();
+			$user_status = @$data["all_status"]['0']->status==""?"unscheduled":@$data["all_status"]['0']->status;
+			if($user_status=="unscheduled" || $user_status=="scheduled" || $user_status=="rescheduled" || $user_status=="courier myself" || count($data["all_status"]) < 1){
+				$this->db->where("investor_id",$investor_id);
+				$data['user_data'] = $this->db->get("ecs_schedules")->result();
+				$this->db->where("invuser_id",$investor_id);
+				$data['bank_details'] = $this->db->get("ecs_investors")->result();
+				$data['holiday_list'] = $this->db->get("ecs_holiday_list")->result();
+				$this->load->view("schedule_screen_nohead",$data);
+			}else{
+				redirect("home/status");
+			}
 	}
 
 	public function land(){
@@ -19,10 +103,28 @@ class Home extends CI_Controller {
 	}
 
 	public function thankyou(){
-		$this->db->where("invuser_id", $this->session->userdata("investor_id"));
-		$data["investor_data"] = $this->db->get("ecs_investors")->row();
-		// print_r($data["investor_data"]);
-		// exit;
+		try {
+			$this->db->where("invuser_id", $this->session->userdata("investor_id"));
+			$data["investor_data"] = $this->db->get("ecs_investors")->row();
+
+			$upd_data = array(
+				"status" => "waiting for pickup from customer",
+				"date_time" => date("Y-m-d H:i:s")
+			);
+			$this->db->where("investor_id", $this->session->userdata("investor_id"));
+			$this->db->update("ecs_status", $upd_data);
+
+			$upd_data2 = array(
+				"investor_id" => $this->session->userdata("investor_id"),
+				"email_id"    => $this->session->userdata("email_id"),
+				"status"      => "courier myself",
+				"updated_by"  => "user",
+				"date_time"   => date("Y-m-d H:i:s")
+			);
+			$this->db->insert("ecs_schedule_status_history", $upd_data2);
+		} catch (Exception $e) {
+			
+		}
 		$this->load->view("thankyou", $data);
 	}
 
@@ -469,6 +571,22 @@ class Home extends CI_Controller {
 		}
 	}
 
+	// this function is to test sms.
+	private function send_sms_test(){
+		$url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=9930929091&text=Test";
+			
+			
+			$agent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)";
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL,$url);
+			curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+			$returned = curl_exec($ch);
+	}
+
 	private function sms_selector($investor_id, $new_status){
 		$this->db->where("invuser_id", $investor_id);
 		$investor_detail = $this->db->get("ecs_investors")->row();
@@ -514,11 +632,11 @@ class Home extends CI_Controller {
 				break;
 
 			case 'accepted':
-				$txt = "Dear Customer, your mandate has been accepted by MyUniverse and is sent to ".$investor_detail->bankName." for their acceptance. The Mandate will be active after we receive the Bank’s feedback.";
+				$txt = "Dear Customer, your mandate has been accepted by MyUniverse and is sent to ".$investor_detail->bankName." for their acceptance. The Mandate will be active after we receive the Bank’s confirmation.";
 				break;
 
 			case 'mandate active':
-				$txt = "Congratulations!! Your mandate for ".$investor_detail->bankName." is active. You can schedule a SIP to be automatically deducted from this account.";
+				$txt = "Congratulations!! Your mandate for ".$investor_detail->bankName." is active. SIP can now be processed on this mandate.";
 				break;
 			}
 			return $txt;
