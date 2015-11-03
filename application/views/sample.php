@@ -34,7 +34,7 @@
 
 	<div class="sub2">
 		<p class="margin_b_2 font_b">Mailing Address</p>
-		<p class="margin_b_1">Aditya Birla Customer Services Pvt.Ltd<br>501,Cello Triumph<br>I.B Patel Road,off W.E. Highway<br>Goregaon(East),Mumbai-400063 </p>
+		<p class="margin_b_1">Aditya Birla Customer Services Ltd<br>501,Cello Triumph<br>I.B Patel Road,off W.E. Highway<br>Goregaon(East),Mumbai-400063 </p>
 	</div>
 </div>
 
@@ -59,7 +59,7 @@
 
 <div class="panel">
 	<p class="margin_b_2">To,</p>
-	<p style="line-height:12px;" class="margin_b_2">I/We, <input type="text" value="&nbsp;" name="" class="w-30"> hereby authorize Aditya Birla Customer Service Pvt.Ltd.( ABCSPL) a sub distributor of Aditya Birla Money  Mart Ltd. to debit my account through ECS(Debit) clearing / Direct Debit account as per the details  given below for making payment to Mutual fund companies for the  Systematic Investment Plan (SIP) transctions scheduled by myself on Aditya Birla Customer Services Pvt.Ltd. The debit transction will be processed by an authorised Service Provider on behalf of ABCSPL. </p>
+	<p style="line-height:12px;" class="margin_b_2">I/We, <input type="text" value="&nbsp;" name="" class="w-30"> hereby authorize Aditya Birla Customer Service Ltd.( ABCSL) a sub distributor of Aditya Birla Money  Mart Ltd. to debit my account through ECS(Debit) clearing / Direct Debit account as per the details  given below for making payment to Mutual fund companies for the  Systematic Investment Plan (SIP) transctions scheduled by myself on Aditya Birla Customer Services Ltd. The debit transction will be processed by an authorised Service Provider on behalf of ABCSL. </p>
 </div>
 
 <div class="red_header_box panel">
@@ -141,7 +141,7 @@
 </div>
 
 <div class="panel">
-	<p style="text-align:center;">the services of MyUniverse are being provided through Aditya Birla Customer Services.Pvt.Ltd.(ABCSPL).
+	<p style="text-align:center;">the services of MyUniverse are being provided through Aditya Birla Customer Services.Ltd.(ABCSL).
  For detailed terms and conditions please log on to www.myuniiverse.co.in</p>
 </div>
 

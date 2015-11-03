@@ -52,7 +52,7 @@
             <hr>
           	<div class="row mt">
               <div class="col-lg-12">
-                <form action="<?=base_url()?>index.php/admin/search_status" method="post" class="frm_search_status_update" onsubmit="return show_loader();">
+                <form action="<?=base_url()?>admin/search_status" method="post" class="frm_search_status_update" onsubmit="return show_loader();">
                   Investor ID:
                   <input type="text" name="txt_investor_id" />
                   Investor Name:

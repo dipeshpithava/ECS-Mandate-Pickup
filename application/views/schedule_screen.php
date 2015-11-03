@@ -50,6 +50,7 @@
 
          <!-- <div class="logoutRight"><a href="/Sitepages/logout.aspx">Logout</a></div> -->
         <ul class="naviagationLink">
+          
           <li><a href="tel:022-61802828"><img src="<?=base_url()?>assets/third_party/images/call.png" /> 022-61802828 (10am-7pm Mon - Sat)</a></li>
          <!-- <li class="highlighted mobile-hide desktop-hide"></li>
           <li class="highlighted"><a href="#"><img src="images/pdf.png" /> <span class="tooltip"><img src="images/up-arrow.png" style="position:absolute; top:-4px; left:40%" /> Download PDF</span></a></li>
@@ -156,7 +157,7 @@
 			</label>-->
         </div>
         <div class="form_field">
-        	 <input size="16" name="txt_date_of_pickup" value="<?php if(@$user_data['0']->date_of_pickup!=""){echo $user_data['0']->date_of_pickup;} ?>"  type="text" data-date-format="dd/mm/yy" class="form-control add-on text_box1" placeholder="dd/mm/yy" id="datepicker" readonly="readonly" >
+        	 <input size="16" name="txt_date_of_pickup" value="<?php if(@$user_data['0']->date_of_pickup!=""){echo date("d/m/Y", strtotime($user_data['0']->date_of_pickup));} ?>"  type="text" data-date-format="dd/mm/yy" class="form-control add-on text_box1" placeholder="dd/mm/yy" id="datepicker" readonly="readonly" >
         </div>
         <div class="form_field">
         	<label>
@@ -212,7 +213,14 @@ copy of <?php if(@$bank_details){ echo @$bank_details['0']->bankName; }?> (XXXXX
                   ?>
                   </li>
                 <li>Before the pick-up, our agent will call you.</li>
-                <li>Please call ECS Desk Number <a href="tel:022-6167565656" class="back_link2">022-6167565656</a></li>
+                <?php
+                  if($is_mobile == "true"){
+                    $tel_link = "tel:022-6167565656";
+                  }else{
+                    $tel_link = "javascript:void(0);";
+                  }
+                ?>
+                <li>Please call ECS Desk Number <a href="<?=$tel_link?>" class="back_link2">022-6167565656</a></li>
             </ol>
 		</div>
       <!--  <div class="form_field form_field1">
@@ -247,12 +255,12 @@ copy of <?php if(@$bank_details){ echo @$bank_details['0']->bankName; }?> (XXXXX
   </ul>
   <div class="clear"></div>
 </div>
-<div class="copy_right desktop-hide">Copyright © 2013 Aditya Birla Customer Services Ltd <span><a target="_blank" href="https://www.myuniverse.co.in/_layouts/prelogin/mobilelegalinfo.aspx?Mid=pp ">Privacy Policy</a> | <a target="_blank" href="https://www.mfjunction.co.in/StaticContent/terms/Terms_condition.pdf ">Terms &amp; Conditions</a></span></div>
+<div class="copy_right desktop-hide">Copyright © 2015 Aditya Birla Customer Services Ltd <span><a target="_blank" href="https://www.myuniverse.co.in/_layouts/prelogin/mobilelegalinfo.aspx?Mid=pp ">Privacy Policy</a> | <a target="_blank" href="https://www.mfjunction.co.in/StaticContent/terms/Terms_condition.pdf ">Terms &amp; Conditions</a></span></div>
 <footer class="mobile-hide">
   <div class="footerCont">
     <div class="footer-ico"><a href="https://stg.adityabirlamoneyuniverse.com/sitepages/homepage.aspx"><img src="<?=base_url()?>assets/third_party/images/footer_abmu_logo.png"></a></div>
     <div id="footerContainer">
-      <div id="ctl00_ABMU_Footer_id_copyright" class="footer">Copyright © 2015 Aditya Birla Customer Services Pvt Ltd.| <a onclick="fnPolicies('Legal Disclaimer','id_LegalDisclaimer');" href="Javascript:void(0);">Legal Disclaimer</a> | <a onclick="fnPolicies('Privacy Policy','id_SecurityPrivacyPolicy');" href="Javascript:void(0);">Privacy Policy</a> | <a onclick="ShowTermsAndConditionAsnyc('tandc_light','tandc_fade', 'id_TACDesc','Terms And Conditions')" href="Javascript:void(0);">Terms and Conditions</a> | <a onclick="ShowInvestTermsAndConditionAsnyc('investtandc_light','investtandc_fade', 'id_InvTACDesc','Terms And Conditions')" href="javascript:void(0);">Investment Account T &amp; C</a> <span class="iadisclaimer">* Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing.</span> <span class="iadisclaimer" style="margin-bottom:0px;">* The research based investment advice &amp; reports, stock and commodity recommendations, if any, projected/ displayed on or communicated through the www.myuniverse.co.in are provided by /created by/ sourced from Aditya Birla Money Mart Ltd, Aditya Birla Money Ltd and Aditya Birla Commodities Broking Ltd, respectively and not by ABCSPL, the owner of this website. For more details, please refer the legal disclaimer</span>
+      <div id="ctl00_ABMU_Footer_id_copyright" class="footer">Copyright © 2015 Aditya Birla Customer Services Ltd.| <a onclick="fnPolicies('Legal Disclaimer','id_LegalDisclaimer');" href="Javascript:void(0);">Legal Disclaimer</a> | <a onclick="fnPolicies('Privacy Policy','id_SecurityPrivacyPolicy');" href="Javascript:void(0);">Privacy Policy</a> | <a onclick="ShowTermsAndConditionAsnyc('tandc_light','tandc_fade', 'id_TACDesc','Terms And Conditions')" href="Javascript:void(0);">Terms and Conditions</a> | <a onclick="ShowInvestTermsAndConditionAsnyc('investtandc_light','investtandc_fade', 'id_InvTACDesc','Terms And Conditions')" href="javascript:void(0);">Investment Account T &amp; C</a> <span class="iadisclaimer">* Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing.</span> <span class="iadisclaimer" style="margin-bottom:0px;">* The research based investment advice &amp; reports, stock and commodity recommendations, if any, projected/ displayed on or communicated through the www.myuniverse.co.in are provided by /created by/ sourced from Aditya Birla Money Mart Ltd, Aditya Birla Money Ltd and Aditya Birla Commodities Broking Ltd, respectively and not by ABCSL, the owner of this website. For more details, please refer the legal disclaimer</span>
         <div id="ctl00_ABMU_Footer_id_broadcastmessage">
           <div id="id_broadcastingmessage" style="color: rgb(1, 54, 130); display: block;">Site is best viewed with Internet Explorer 11+, Firefox 30+, Chrome 30+ and Safari 5.1+ with a resolution of 1024 x 768.</div>
         </div>
@@ -292,7 +300,7 @@ copy of <?php if(@$bank_details){ echo @$bank_details['0']->bankName; }?> (XXXXX
   </div>
 </section>
 <script type="text/javascript" src="<?=base_url()?>assets/third_party/js/jquery-1.10.2.min.js"></script> 
-<script src="<?=base_url()?>assets/third_party/js/calendar.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/third_party/js/calendar.js?v=123" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/third_party/js/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/js/jquery.form.min.js"></script>
 <script src="<?=base_url()?>assets/third_party/js/sweetalert.min.js"></script>

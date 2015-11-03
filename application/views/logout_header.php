@@ -49,7 +49,7 @@ Goregaon (East), Mumbai - 400063</p>
 </section>
 <section class="nb-navheader mobile-hide">
   <div class="container">
-    <div class="col-m-2"><img src="<?=base_url()?>assets/images/myuniverse-logo.png" class="responsive-img"></div>
+    <div class="col-m-2"><a href="https://stg.adityabirlamoneyuniverse.com/sitepages/homepage.aspx"><img src="<?=base_url()?>assets/images/myuniverse-logo.png" class="responsive-img"></a></div>
     <div class="col-m-10">
         <ul class="ul-navli">
         <li><a href="https://stg.adityabirlamoneyuniverse.com/equity-account/../../Sitepages/Homepage.aspx">MyUniverse</a></li>

@@ -35,6 +35,25 @@ class Home extends CI_Controller {
 		}
 	}
 
+	private function isMobileDevice(){
+	    $aMobileUA = array(
+	        '/iphone/i' => 'iPhone', 
+	        '/ipod/i' => 'iPod', 
+	        '/ipad/i' => 'iPad', 
+	        '/android/i' => 'Android', 
+	        '/blackberry/i' => 'BlackBerry', 
+	        '/webos/i' => 'Mobile'
+	    );
+
+	    //Return true if Mobile User Agent is detected
+	    foreach($aMobileUA as $sMobileKey => $sMobileOS){
+	        if(preg_match($sMobileKey, $_SERVER['HTTP_USER_AGENT'])){
+	            return "true";
+	        }
+	    }
+	    return "false";
+	}
+
 	public function status_nohead(){
 		if($this->session->userdata('investor_id') == ""){
 			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
@@ -95,11 +114,26 @@ class Home extends CI_Controller {
 	}
 
 	public function land(){
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
-			exit;
+		try {
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+				exit;
+			}
+			$investor_id = $this->session->userdata('investor_id');
+			$this->db->where("investor_id",$investor_id);
+			$data["all_status"] = $this->db->get("ecs_status")->result();
+			// print_r($data["all_status"]);
+			// exit;
+			$user_status = @$data["all_status"]['0']->status==""?"unscheduled":@$data["all_status"]['0']->status;
+			if($user_status=="unscheduled" || $user_status=="scheduled" || $user_status=="rescheduled" || count($data["all_status"]) < 1){
+				$this->load->view("firstpage");
+			}else{
+				redirect("home/status");
+			}
+		} catch (Exception $e) {
+			
 		}
-		$this->load->view("firstpage");
+		
 	}
 
 	public function thankyou(){
@@ -107,12 +141,12 @@ class Home extends CI_Controller {
 			$this->db->where("invuser_id", $this->session->userdata("investor_id"));
 			$data["investor_data"] = $this->db->get("ecs_investors")->row();
 
-			$upd_data = array(
-				"status" => "waiting for pickup from customer",
-				"date_time" => date("Y-m-d H:i:s")
-			);
-			$this->db->where("investor_id", $this->session->userdata("investor_id"));
-			$this->db->update("ecs_status", $upd_data);
+			// $upd_data = array(
+			// 	"status" => "waiting for pickup from customer",
+			// 	"date_time" => date("Y-m-d H:i:s")
+			// );
+			// $this->db->where("investor_id", $this->session->userdata("investor_id"));
+			// $this->db->update("ecs_status", $upd_data);
 
 			$upd_data2 = array(
 				"investor_id" => $this->session->userdata("investor_id"),
@@ -122,10 +156,11 @@ class Home extends CI_Controller {
 				"date_time"   => date("Y-m-d H:i:s")
 			);
 			$this->db->insert("ecs_schedule_status_history", $upd_data2);
+
+			$this->load->view("thankyou", $data);
 		} catch (Exception $e) {
 			
 		}
-		$this->load->view("thankyou", $data);
 	}
 
 	public function schedule_again(){
@@ -162,11 +197,33 @@ class Home extends CI_Controller {
 		echo @$investor_status->status;
 	}
 
+	// public function test_mob(){
+	// 	$aMobileUA = array(
+	//         '/iphone/i' => 'iPhone', 
+	//         '/ipod/i' => 'iPod', 
+	//         '/ipad/i' => 'iPad', 
+	//         '/android/i' => 'Android', 
+	//         '/blackberry/i' => 'BlackBerry', 
+	//         '/webos/i' => 'Mobile'
+	//     );
+
+	//     //Return true if Mobile User Agent is detected
+	//     foreach($aMobileUA as $sMobileKey => $sMobileOS){
+	//         if(preg_match($sMobileKey, $_SERVER['HTTP_USER_AGENT'])){
+	//             echo "true";
+	//         }
+	//     }
+	//     echo "false";
+		
+	// }
+
 	public function schedule(){
 		if($this->session->userdata('investor_id') == ""){
 			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
 			exit;
 		}
+
+		$data["is_mobile"] = $this->isMobileDevice();
 
 		$investor_id = $this->session->userdata('investor_id');
 		if($investor_id==""){
@@ -187,7 +244,7 @@ class Home extends CI_Controller {
 			$this->db->where("investor_id",$investor_id);
 			$data["all_status"] = $this->db->get("ecs_status")->result();
 			$user_status = @$data["all_status"]['0']->status==""?"unscheduled":@$data["all_status"]['0']->status;
-			if($user_status=="unscheduled" || $user_status=="scheduled" || $user_status=="rescheduled" || $user_status=="courier myself" || count($data["all_status"]) < 1){
+			if($user_status=="unscheduled" || $user_status=="scheduled" || $user_status=="rescheduled" || count($data["all_status"]) < 1){
 				$this->db->where("investor_id",$investor_id);
 				$data['user_data'] = $this->db->get("ecs_schedules")->result();
 				$this->db->where("invuser_id",$investor_id);
@@ -220,6 +277,9 @@ class Home extends CI_Controller {
 		$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
 		if(count($data["all_status"]) < 1){
 			$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+		}
+		if(count($data["all_status"]) < 1){
+			redirect("home/schedule");
 		}
 		
 		$this->load->view("ecstrack1", $data);
@@ -341,7 +401,7 @@ class Home extends CI_Controller {
 			// Send SMS
 			$this->send_sms($investor_id, 'courier myself');
 		if($result){
-			echo "successfully updated";	
+			echo "successfully updated";
 			exit;
 		}
 		}else{
@@ -409,7 +469,7 @@ class Home extends CI_Controller {
 					"landmark"       => $this->input->post("landmark"),
 					"city"           => $this->input->post("city"),
 					"state"          => $this->input->post("state"),
-					"date_of_pickup" => $this->input->post("txt_date_of_pickup"),
+					"date_of_pickup" => date("Y/m/d", strtotime($this->input->post("txt_date_of_pickup"))),
 					"time_of_pickup" =>	$this->input->post("txt_time_of_pickup"),
 					"updated_by"     => "User",
 					"mobileno"       => $this->input->post("mobile_no")
@@ -449,6 +509,16 @@ class Home extends CI_Controller {
 						
 						$result = $this->db->insert("ecs_status", $ins_data);
 					}
+
+					$upd_data2 = array(
+							"investor_id" => $this->session->userdata("investor_id"),
+							"email_id"    => $this->session->userdata("email_id"),
+							"status"      => "scheduled",
+							"updated_by"  => "user",
+							"date_time"   => date("Y-m-d H:i:s")
+						);
+					$this->db->insert("ecs_schedule_status_history", $upd_data2);
+
 					// Send Email
 					$this->send_email($investor_id, 'scheduled');
 					// Send SMS
@@ -474,7 +544,7 @@ class Home extends CI_Controller {
 				"landmark"       => $this->input->post("landmark"),
 				"city"           => $this->input->post("txt_city"),
 				"state"          => $this->input->post("txt_state"),
-				"date_of_pickup" => $this->input->post("txt_date_of_pickup"),
+				"date_of_pickup" => date("Y/m/d", strtotime($this->input->post("txt_date_of_pickup"))),
 				"time_of_pickup" => $this->input->post("txt_time_of_pickup"),
 				"mobileno"       => $this->input->post("mobile_no")
 			);

@@ -106,6 +106,7 @@ class Admin extends CI_Controller {
 		$q = implode(" AND ", $q5);
 
 	    $data["courier_send_list"] = $this->db->query("select * from ecs_status inner join ecs_investors on investor_id = invuser_id where status = 'courier myself' AND ".$q)->result();
+	    // $data["courier_send_list"] = $this->db->query("select st.status as user_status, st.date_time, inv.* from ecs_schedule_status_history st inner join ecs_investors inv on st.investor_id = inv.invuser_id where status = 'courier myself' AND ".$q)->result();
 	    
 	    echo $this->load->view("admin/ajax_courier_myself", $data, true);
 	}
@@ -114,9 +115,11 @@ class Admin extends CI_Controller {
 		$investor_name = $this->input->post("txt_investor_name");
 		$investor_emailid = $this->input->post("txt_investor_emailid");
 		$investor_pan = $this->input->post("txt_investor_pan");
+		
+		
 
 		if($investor_id == "" && $investor_name == "" && $investor_emailid == "" && $investor_pan == ""){
-			echo "No result found.";
+			echo "No result found.".$investor_emailid;
 			exit;
 		}
 
@@ -144,13 +147,19 @@ class Admin extends CI_Controller {
 				$inv_ids .= ",'".$inv_data_row->invuser_id."'";
 			}
 			$inv_ids = substr($inv_ids, 1);
-			$data["all_status"] = $this->db->query("select ecs_status.status, ecs_status.remark, ecs_schedules.* from ecs_status inner join ecs_schedules on ecs_status.investor_id = ecs_schedules.investor_id where ecs_schedules.investor_id in (".$inv_ids.")")->result();
+			// $data["all_status"] = $this->db->query("select ecs_status.status, ecs_status.remark, ecs_schedules.* from ecs_status inner join ecs_schedules on ecs_status.investor_id = ecs_schedules.investor_id where ecs_schedules.investor_id in (".$inv_ids.")")->result();
+			$data["all_status"] = $this->db->query("select ecs_status.status, ecs_status.remark, ecs_status.investor_id as inv_usr_id, ecs_schedules.* from ecs_status left outer join ecs_schedules on ecs_status.investor_id = ecs_schedules.investor_id where ecs_status.investor_id in (".$inv_ids.")")->result();
 			if(count($data["all_status"]) < 1){
 				echo "No result found.";
 				exit;
 			}
 		}
 		echo $this->load->view("admin/ajax_status", $data, true);
+	}
+	public function get_mu_email_id($investor_id){
+		$this->db->where("invuser_id", $investor_id);
+		$email_data = $this->db->get("ecs_investors")->row();
+		return $email_data->myUniverseEmailId;
 	}
 	public function search_master_data(){
 		$investor_id = $this->input->post("txt_investor_id");
@@ -271,6 +280,7 @@ class Admin extends CI_Controller {
 		$this->db->join('ecs_investors inv','st.investor_id=inv.invuser_id');
 		$this->db->where(array('st.status' => 'courier myself'));
 		$data["courier_send_list"] = $this->db->get()->result();
+		// select st.status as user_status, st.date_time, inv.* from ecs_schedule_status_history st inner join ecs_investors inv on st.investor_id = inv.invuser_id where st.status = 'courier myself'
 		$this->load->view('admin/courier_myself',$data);
 	}
 	

@@ -64,8 +64,10 @@ $in_process = "";
 $rejected = "";
 $accepted = "";
 $mandate_active = "";
+$courier_myself = "";
 if(count($all_status) > 0){
   foreach($all_status as $all_status_row){
+    $status_heading = "";
     if($all_status_row->status == "scheduled" || $all_status_row->status == "rescheduled"){
       $schedule_date = @$all_status_row->date_time;
       $status_heading = "Appointment Received";
@@ -98,9 +100,11 @@ if(count($all_status) > 0){
       $mandate_active = @$all_status_row->date_time;
       $status_heading = "ECS Mandate Successfully Activated";
     }
+    if($all_status_row->status == "courier myself"){
+      $courier_myself = @$all_status_row->date_time;
+      $status_heading = "Please courier your ECS Mandate for further processing";
+    }
   }
-}else{
-
 }
 ?>
 
@@ -119,7 +123,10 @@ if(count($all_status) > 0){
             <div class="datestatus">
               <p class="date" id="st1">
                 <?php
-                if($schedule_date != ""){
+                if($courier_myself != ""){
+                  $date_1 = new DateTime(@$courier_myself);
+                  echo $date_1->format('M j, Y');
+                }else if($schedule_date != ""){
                   $date_1 = new DateTime(@$schedule_date);
                   echo $date_1->format('M j, Y');
                 }
@@ -128,7 +135,13 @@ if(count($all_status) > 0){
               <p class="dtlstatus">Appoinment Recieved</p>
             </div>
             <?php
-            if($schedule_date != ""){
+            if($courier_myself != ""){
+              ?>
+              <p class="statusbtn">
+                Successful
+              </p>
+              <?php
+            }else if($schedule_date != ""){
               ?>
               <p class="statusbtn">
                 Successful
@@ -148,6 +161,9 @@ if(count($all_status) > 0){
                 }else if($waiting_for_pickup != ""){
                   $date_2 = new DateTime(@$waiting_for_pickup);
                   $dt2 = $date_2->format('M j, Y');
+                }else if($courier_myself != ""){
+                  // $date_2 = new DateTime(@$courier_myself);
+                  // $dt2 = $date_2->format('M j, Y');
                 }else{
                   $gray_class2 = "gray";
                 }
@@ -167,6 +183,10 @@ if(count($all_status) > 0){
               <p class="statusbtn">Successful</p>
               <?php
             }else if($waiting_for_pickup != ""){
+              ?>
+              <p class="statusbtn inprogress">inprogress</p>
+              <?php
+            }else if($courier_myself != ""){
               ?>
               <p class="statusbtn inprogress">inprogress</p>
               <?php
@@ -276,7 +296,6 @@ if(count($all_status) > 0){
                   }else if($rejected != ""){
                     $date_5 = new DateTime(@$rejected);
                     $dt5 = $date_5->format('M j, Y');
-                    $add_gray = "gray";
                   }else{
                     $add_gray = "gray";
                   }
@@ -343,7 +362,7 @@ if(count($all_status) > 0){
   <div class="footerCont">
     <div class="footer-ico"><a href="https://stg.adityabirlamoneyuniverse.com/sitepages/homepage.aspx"><img src="http://mutest.co.in/kiran/ECS/html/images/xfooter_abmu_logo.png.pagespeed.ic.JyOPaFsHjO.png" pagespeed_url_hash="4187608457"></a></div>
     <div id="footerContainer">
-      <div id="ctl00_ABMU_Footer_id_copyright" class="footer">Copyright © 2013 Aditya Birla Customer Services Pvt Ltd.| <a onclick="fnPolicies('Legal Disclaimer','id_LegalDisclaimer');" href="Javascript:void(0);">Legal Disclaimer</a> | <a onclick="fnPolicies('Privacy Policy','id_SecurityPrivacyPolicy');" href="Javascript:void(0);">Privacy Policy</a> | <a onclick="ShowTermsAndConditionAsnyc('tandc_light','tandc_fade', 'id_TACDesc','Terms And Conditions')" href="Javascript:void(0);">Terms and Conditions</a> | <a onclick="ShowInvestTermsAndConditionAsnyc('investtandc_light','investtandc_fade', 'id_InvTACDesc','Terms And Conditions')" href="javascript:void(0);">Investment Account T &amp; C</a> <span class="iadisclaimer">* Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing.</span> <span class="iadisclaimer" style="margin-bottom:0px;">* The research based investment advice &amp; reports, stock and commodity recommendations, if any, projected/ displayed on or communicated through the www.myuniverse.co.in are provided by /created by/ sourced from Aditya Birla Money Mart Ltd, Aditya Birla Money Ltd and Aditya Birla Commodities Broking Ltd, respectively and not by ABCSPL, the owner of this website. For more details, please refer the legal disclaimer</span>
+      <div id="ctl00_ABMU_Footer_id_copyright" class="footer">Copyright © 2015 Aditya Birla Customer Services Ltd.| <a onclick="fnPolicies('Legal Disclaimer','id_LegalDisclaimer');" href="Javascript:void(0);">Legal Disclaimer</a> | <a onclick="fnPolicies('Privacy Policy','id_SecurityPrivacyPolicy');" href="Javascript:void(0);">Privacy Policy</a> | <a onclick="ShowTermsAndConditionAsnyc('tandc_light','tandc_fade', 'id_TACDesc','Terms And Conditions')" href="Javascript:void(0);">Terms and Conditions</a> | <a onclick="ShowInvestTermsAndConditionAsnyc('investtandc_light','investtandc_fade', 'id_InvTACDesc','Terms And Conditions')" href="javascript:void(0);">Investment Account T &amp; C</a> <span class="iadisclaimer">* Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing.</span> <span class="iadisclaimer" style="margin-bottom:0px;">* The research based investment advice &amp; reports, stock and commodity recommendations, if any, projected/ displayed on or communicated through the www.myuniverse.co.in are provided by /created by/ sourced from Aditya Birla Money Mart Ltd, Aditya Birla Money Ltd and Aditya Birla Commodities Broking Ltd, respectively and not by ABCSL, the owner of this website. For more details, please refer the legal disclaimer</span>
         <div id="ctl00_ABMU_Footer_id_broadcastmessage">
           <div id="id_broadcastingmessage" style="color: rgb(1, 54, 130); display: block;">Site is best viewed with Internet Explorer 11+, Firefox 30+, Chrome 30+ and Safari 5.1+ with a resolution of 1024 x 768.</div>
         </div>

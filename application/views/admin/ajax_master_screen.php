@@ -63,7 +63,7 @@
                       <td><?=@$inv_schedule->date_of_pickup==""?"&nbsp;":@$inv_schedule->date_of_pickup?></td>
                       <td><?=@$inv_schedule->time_of_pickup==""?"&nbsp;":@$inv_schedule->time_of_pickup?></td>
                       <td><?php
-            if(@$inv_status->status=="" || @$inv_status->status=="rescheduled" || @$inv_status->status=="rejected" || @$inv_status->status=="scheduled"){?>
+            if(@$inv_status->status=="" || @$inv_status->status=="rescheduled" || @$inv_status->status=="rejected" || @$inv_status->status=="scheduled" || @$inv_status->status=="courier myself"){?>
              <a id="scheduleds" data-schedule="<?=@$inv_status->status?>" data-emails="<?=$user_datas->myUniverseEmailId?>" data-user_id="<?=$user_datas->invuser_id?>" href="javascript:void(0)">Schedule</a> | <a href="<?=base_url()?>admin/schedule_history/<?=$user_datas->invuser_id?>">Schedule History</a><!--  | <a id="sends" href="javascript:void(0)" data-invid="<?=$user_datas->invuser_id?>" class="send_msg">Send</a> -->
            <?php }else{?>
           <a  href="<?=base_url()?>admin/schedule_history/<?=$user_datas->invuser_id?>">Schedule History</a><!--  | <a id="sends" data-invid="<?=$user_datas->invuser_id?>" class="send_msg" href="javascript:void(0)">Send</a> -->
