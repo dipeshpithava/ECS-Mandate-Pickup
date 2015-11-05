@@ -35,47 +35,74 @@ $in_process = "";
 $rejected = "";
 $accepted = "";
 $mandate_active = "";
-if(count($all_status) > 0){
-  foreach($all_status as $all_status_row){
-    if($all_status_row->status == "scheduled" || $all_status_row->status == "rescheduled"){
-      $schedule_date = @$all_status_row->date_time;
-      $status_heading = "Appointment Received";
-    }
-    if($all_status_row->status == "waiting for pickup from customer"){
-      $waiting_for_pickup = @$all_status_row->date_time;
-      $status_heading = "Appointment Received";
-    }
-    if($all_status_row->status == "waiting for delivery to mu"){
-      $waiting_for_delivery = @$all_status_row->date_time;
-      $status_heading = "ECS Mandate Picked up Successfully";
-    }
-    if($all_status_row->status == "received by mu"){
-      $received_by_mu = @$all_status_row->date_time;
-      $status_heading = "ECS Mandate received at MyUniverse";
-    }
-    if($all_status_row->status == "in process"){
-      $in_process = @$all_status_row->date_time;
-      $status_heading = "Review by MyUniverse is in Progress";
-    }
-    if($all_status_row->status == "rejected"){
-      $rejected = @$all_status_row->date_time;
-      $status_heading = "ECS Mandate Rejected";
-    }
-    if($all_status_row->status == "accepted"){
-      $accepted = @$all_status_row->date_time;
-      $status_heading = "ECS Mandate sent to Bank for Review";
-    }
-    if($all_status_row->status == "mandate active"){
-      $mandate_active = @$all_status_row->date_time;
-      $status_heading = "ECS Mandate Successfully Activated";
+$courier_myself = "";
+
+if($is_scheduled == 0){
+  ?>
+  <section class="ecstrackPanel">
+  <div class="container">
+    <h4 class="h4-heading">Please schedule your ECS Mandate here <a href="<?=base_url()?>home/land_nohead">Schedule My ECS Mandate Pickup</a></h4>
+  </div>
+</section>
+<div class="call clearfix desktop-hide">
+  <ul>
+    <li>
+      <ul>
+        <a href="tel:022-61802828">
+        <li class="width100">Tap to Call</li>
+        <li><span class="call_icon"></span></li>
+        <li>022-61802828</li>
+        </a>
+      </ul>
+    </li>
+  </ul>
+  <div class="clear"></div>
+</div>
+  <?php
+}else{
+  if(count($all_status) > 0){
+    foreach($all_status as $all_status_row){
+      $status_heading = "";
+      if($all_status_row->status == "scheduled" || $all_status_row->status == "rescheduled"){
+        $schedule_date = @$all_status_row->date_time;
+        $status_heading = "Appointment Received";
+      }
+      if($all_status_row->status == "waiting for pickup from customer"){
+        $waiting_for_pickup = @$all_status_row->date_time;
+        $status_heading = "Appointment Received";
+      }
+      if($all_status_row->status == "waiting for delivery to mu"){
+        $waiting_for_delivery = @$all_status_row->date_time;
+        $status_heading = "ECS Mandate Picked up Successfully";
+      }
+      if($all_status_row->status == "received by mu"){
+        $received_by_mu = @$all_status_row->date_time;
+        $status_heading = "ECS Mandate received at MyUniverse";
+      }
+      if($all_status_row->status == "in process"){
+        $in_process = @$all_status_row->date_time;
+        $status_heading = "Review by MyUniverse is in Progress";
+      }
+      if($all_status_row->status == "rejected"){
+        $rejected = @$all_status_row->date_time;
+        $status_heading = "ECS Mandate Rejected";
+      }
+      if($all_status_row->status == "accepted"){
+        $accepted = @$all_status_row->date_time;
+        $status_heading = "ECS Mandate sent to Bank for Review";
+      }
+      if($all_status_row->status == "mandate active"){
+        $mandate_active = @$all_status_row->date_time;
+        $status_heading = "ECS Mandate Successfully Activated";
+      }
+      if($all_status_row->status == "courier myself"){
+        $courier_myself = @$all_status_row->date_time;
+        $status_heading = "Please courier your ECS Mandate for further processing";
+      }
     }
   }
-}else{
-
-}
-?>
-
-<section class="ecstrackPanel">
+  ?>
+  <section class="ecstrackPanel">
   <div class="container">
     <h4 class="h4-heading"><?=$status_heading?></h4>
     <!-- <h6 class="h6-heading">Mandate Activation Date: Sep 16, 2015</h6> -->
@@ -90,7 +117,10 @@ if(count($all_status) > 0){
             <div class="datestatus">
               <p class="date" id="st1">
                 <?php
-                if($schedule_date != ""){
+                if($courier_myself != ""){
+                  $date_1 = new DateTime(@$courier_myself);
+                  echo $date_1->format('M j, Y');
+                }else if($schedule_date != ""){
                   $date_1 = new DateTime(@$schedule_date);
                   echo $date_1->format('M j, Y');
                 }
@@ -99,7 +129,13 @@ if(count($all_status) > 0){
               <p class="dtlstatus">Appoinment Recieved</p>
             </div>
             <?php
-            if($schedule_date != ""){
+            if($courier_myself != ""){
+              ?>
+              <p class="statusbtn">
+                Successful
+              </p>
+              <?php
+            }else if($schedule_date != ""){
               ?>
               <p class="statusbtn">
                 Successful
@@ -119,6 +155,9 @@ if(count($all_status) > 0){
                 }else if($waiting_for_pickup != ""){
                   $date_2 = new DateTime(@$waiting_for_pickup);
                   $dt2 = $date_2->format('M j, Y');
+                }else if($courier_myself != ""){
+                  // $date_2 = new DateTime(@$courier_myself);
+                  // $dt2 = $date_2->format('M j, Y');
                 }else{
                   $gray_class2 = "gray";
                 }
@@ -138,6 +177,10 @@ if(count($all_status) > 0){
               <p class="statusbtn">Successful</p>
               <?php
             }else if($waiting_for_pickup != ""){
+              ?>
+              <p class="statusbtn inprogress">inprogress</p>
+              <?php
+            }else if($courier_myself != ""){
               ?>
               <p class="statusbtn inprogress">inprogress</p>
               <?php
@@ -199,7 +242,7 @@ if(count($all_status) > 0){
           <div class="bank ecssprite"></div>
           <div class="statusinfo">
             <?php
-                if($accepted != ""){
+                if($accepted != "" || $rejected != ""){
                   $date_4 = new DateTime(@$accepted);
                   $dt4 = $date_4->format('M j, Y');
                 }else{
@@ -247,7 +290,6 @@ if(count($all_status) > 0){
                   }else if($rejected != ""){
                     $date_5 = new DateTime(@$rejected);
                     $dt5 = $date_5->format('M j, Y');
-                    $add_gray = "gray";
                   }else{
                     $add_gray = "gray";
                   }
@@ -309,6 +351,13 @@ if(count($all_status) > 0){
   </ul>
   <div class="clear"></div>
 </div>
+  <?php
+}
+
+
+?>
+
+
 
 
 <div id="keep_alive">

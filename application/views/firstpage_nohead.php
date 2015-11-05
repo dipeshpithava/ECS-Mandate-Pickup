@@ -77,7 +77,7 @@ $("#courier_ecs").click(function(){
   $("#frm_pincode").submit(); 
 });
 $("#courierSchedule").click(function(){
- location.assign("<?=base_url()?>home/schedule"); 
+ location.assign("<?=base_url()?>home/schedule_nohead"); 
 });
 });
 

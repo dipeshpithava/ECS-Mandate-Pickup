@@ -62,7 +62,7 @@
 
 	$(function() {
 	    $( "#pickup_date" ).datepicker({
-			dateFormat: "yy-m-dd",
+			dateFormat: "dd-m-yy",
 			minDate: 1,
 			maxDate: '1m', 
 			changeMonth: true,

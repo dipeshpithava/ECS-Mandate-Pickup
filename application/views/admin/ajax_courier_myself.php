@@ -8,6 +8,7 @@
           					  <th>Account No</th>
                       <th>DOB</th>
           					  <th>Confirmation Date</th>
+                      <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -23,6 +24,7 @@
 					            <td><?=$courier_list->accountNumber?></td>
                       <td><?=$courier_list->DOB?></td>
 					            <td><?=$courier_list->date_time?></td>
+                      <td><a id="scheduleds" data-emails="<?=$courier_list->myUniverseEmailId?>" data-user_id="<?=$courier_list->invuser_id?>" href="javascript:void(0)">Schedule</a></td>
                     </tr>
                     <?php
                   }}

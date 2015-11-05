@@ -5,16 +5,17 @@ class Home extends CI_Controller {
 		date_default_timezone_set('Asia/Kolkata');
 		parent::__construct();
 		
-		define("ERR_DIR_DB", "/Users/itrs-190/Sites/ci/application/logs/err_DB.log");
-		define("ERR_DIR_EMAIL", "/Users/itrs-190/Sites/ci/application/logs/err_email.log");
-		define("ERR_DIR_SMS", "/Users/itrs-190/Sites/ci/application/logs/err_sms.log");
-		define("ERR_DIR_SAML", "/Users/itrs-190/Sites/ci/application/logs/err_saml.log");
+		define("ERR_DIR_DB", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_DB.log");
+		define("ERR_DIR_EMAIL", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_email.log");
+		define("ERR_DIR_SMS", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_sms.log");
+		define("ERR_DIR_SAML", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_saml.log");
 
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
 	}
 
 	private function log_error($error_level, $message){
+		$message = date("Y-m-d H:i:s")."\n".$message."\n\n|";
 		switch($error_level){
 			case '0':
 				// If database insert / update fails.
@@ -33,6 +34,12 @@ class Home extends CI_Controller {
 				error_log($message, 3, ERR_DIR_SAML);
 				break;
 		}
+	}
+
+	public function test_log(){
+		echo "IN";
+		exit;
+		// $this->log_error(0, "Test 1");
 	}
 
 	private function isMobileDevice(){
@@ -54,38 +61,88 @@ class Home extends CI_Controller {
 	    return "false";
 	}
 
-	public function status_nohead(){
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
-			exit;
-		}
+	public function thankyou_nohead(){
+		try {
+			$this->db->where("invuser_id", $this->session->userdata("investor_id"));
+			$data["investor_data"] = $this->db->get("ecs_investors")->row();
 
-		$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
-		if(count($data["all_status"]) < 1){
-			$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+			// $upd_data = array(
+			// 	"status" => "waiting for pickup from customer",
+			// 	"date_time" => date("Y-m-d H:i:s")
+			// );
+			// $this->db->where("investor_id", $this->session->userdata("investor_id"));
+			// $this->db->update("ecs_status", $upd_data);
+
+			$upd_data2 = array(
+				"investor_id" => $this->session->userdata("investor_id"),
+				"email_id"    => $this->session->userdata("email_id"),
+				"status"      => "courier myself",
+				"updated_by"  => "user",
+				"date_time"   => date("Y-m-d H:i:s")
+			);
+			$this->db->insert("ecs_schedule_status_history", $upd_data2);
+
+			$this->load->view("thankyou_nohead", $data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
-		
-		$this->load->view("ecstrack_nohead", $data);
+	}
+
+	public function pincode_nohead($city_pin=""){
+		try {
+			$data['pin'] = $city_pin;
+			$data['redirect_from'] = $this->input->post("redirect_from");
+			$this->load->view("picode_nohead",$data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
+	}
+
+	public function status_nohead(){
+		try {
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
+				exit;
+			}
+			$data["is_scheduled"] = "1"; // Yes
+			$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
+			if(count($data["all_status"]) < 1){
+				$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+			}
+			if(count($data["all_status"]) < 1){
+				// redirect("home/schedule");
+				$data["is_scheduled"] = "0"; // No
+			}
+			
+			$this->load->view("ecstrack_nohead", $data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 
 	public function land_nohead(){
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
-			exit;
+		try {
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+				exit;
+			}
+			$this->load->view("firstpage_nohead");
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
-		$this->load->view("firstpage_nohead");
 	}
 
 	public function schedule_nohead(){
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
-			exit;
-		}
+		try {
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+				exit;
+			}
 
-		$investor_id = $this->session->userdata('investor_id');
-		if($investor_id==""){
-			die("Not an Authenticated User.");
-		}
+			$investor_id = $this->session->userdata('investor_id');
+			if($investor_id==""){
+				die("Not an Authenticated User.");
+			}
 
 		
 			$this->db->where("invuser_id",$investor_id);
@@ -109,8 +166,11 @@ class Home extends CI_Controller {
 				$data['holiday_list'] = $this->db->get("ecs_holiday_list")->result();
 				$this->load->view("schedule_screen_nohead",$data);
 			}else{
-				redirect("home/status");
+				redirect(base_url()."status");
 			}
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 
 	public function land(){
@@ -128,10 +188,10 @@ class Home extends CI_Controller {
 			if($user_status=="unscheduled" || $user_status=="scheduled" || $user_status=="rescheduled" || count($data["all_status"]) < 1){
 				$this->load->view("firstpage");
 			}else{
-				redirect("home/status");
+				redirect(base_url()."status");
 			}
 		} catch (Exception $e) {
-			
+			$this->log_error(0, $e->getMessage());
 		}
 		
 	}
@@ -159,7 +219,7 @@ class Home extends CI_Controller {
 
 			$this->load->view("thankyou", $data);
 		} catch (Exception $e) {
-			
+			$this->log_error(0, $e->getMessage());
 		}
 	}
 
@@ -171,9 +231,9 @@ class Home extends CI_Controller {
 			);
 			$this->db->where("investor_id", $this->session->userdata("investor_id"));
 			$this->db->update("ecs_status", $upd_data);
-			redirect("https://stg.adityabirlamoneyuniverse.com/schedule-ecs-pickup/home/schedule");
+			redirect(base_url()."schedule-now");
 		} catch (Exception $e) {
-			
+			$this->log_error(0, $e->getMessage());
 		}
 	}
 	
@@ -182,19 +242,27 @@ class Home extends CI_Controller {
 	}
 
 	public function is_valid_pincode(){
-		$this->db->where("pincode", $this->input->post("txt_pincode"));
-		$result_set = $this->db->get("ecs_all_pincodes")->result();
-		if(count($result_set) < 1){
-			echo "invalid";
-		}else{
-			echo "valid";
+		try {
+			$this->db->where("pincode", $this->input->post("txt_pincode"));
+			$result_set = $this->db->get("ecs_all_pincodes")->result();
+			if(count($result_set) < 1){
+				echo "invalid";
+			}else{
+				echo "valid";
+			}
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
 	}
 
 	public function get_status(){
-		$this->db->where("investor_id", $this->session->userdata("investor_id"));
-		$investor_status = $this->db->get("ecs_status")->row();
-		echo @$investor_status->status;
+		try {
+			$this->db->where("investor_id", $this->session->userdata("investor_id"));
+			$investor_status = $this->db->get("ecs_status")->row();
+			echo @$investor_status->status;
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 
 	// public function test_mob(){
@@ -218,18 +286,18 @@ class Home extends CI_Controller {
 	// }
 
 	public function schedule(){
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
-			exit;
-		}
+		try {
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+				exit;
+			}
 
-		$data["is_mobile"] = $this->isMobileDevice();
+			$data["is_mobile"] = $this->isMobileDevice();
 
-		$investor_id = $this->session->userdata('investor_id');
-		if($investor_id==""){
-			die("Not an Authenticated User.");
-		}
-
+			$investor_id = $this->session->userdata('investor_id');
+			if($investor_id==""){
+				die("Not an Authenticated User.");
+			}
 		
 			$this->db->where("invuser_id",$investor_id);
 			$is_user_available = $this->db->get("ecs_investors")->result();
@@ -252,207 +320,238 @@ class Home extends CI_Controller {
 				$data['holiday_list'] = $this->db->get("ecs_holiday_list")->result();
 				$this->load->view("schedule_screen",$data);
 			}else{
-				redirect("home/status");
+				redirect(base_url()."status");
 			}
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 	
 	public function get_day(){
-		$date = $this->input->post("name");
-		$day = date('l', strtotime($date));
-		echo $day;
+		try {
+			$date = $this->input->post("name");
+			$day = date('l', strtotime($date));
+			echo $day;
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 
 	public function get_remark(){
-		$this->db->where("investor_id", $this->session->userdata('investor_id'));
-		$remark = $this->db->get("ecs_status")->row();
-		return $remark->remark;
+		try {
+			$this->db->where("investor_id", $this->session->userdata('investor_id'));
+			$remark = $this->db->get("ecs_status")->row();
+			return $remark->remark;
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 	
 	public function status(){
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
-			exit;
-		}
+		try {
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
+				exit;
+			}
 
-		$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
-		if(count($data["all_status"]) < 1){
-			$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+			$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
+			if(count($data["all_status"]) < 1){
+				$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+			}
+			if(count($data["all_status"]) < 1){
+				redirect(base_url()."schedule-now");
+			}
+			
+			$this->load->view("ecstrack1", $data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
-		if(count($data["all_status"]) < 1){
-			redirect("home/schedule");
-		}
-		
-		$this->load->view("ecstrack1", $data);
 	}
 
 	public function status1(){
-		// $data["scheduled_status"] = 1 => successful
-		// $data["scheduled_status"] = 2 => inprogress
-		// $data["scheduled_status"] = 3 => rejected
-		if($this->session->userdata('investor_id') == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
-			exit;
-		}
-		$data["curr_status"] = $this->db->query("select * from ecs_status where investor_id = '".$this->session->userdata('investor_id')."'")->row();
-		
-		if($data["curr_status"]->status == "scheduled" || $data["curr_status"]->status == "rescheduled" || $data["curr_status"]->status == "waiting for pickup from customer"){
-			$data["scheduled_date"] = $data["curr_status"]->date_time;
-
-			$data["scheduled_status"] = 1;
-
-			$data["status_num"] = 1;
-		}
-		if($data["curr_status"]->status == "received by mu"){
-			$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			
-			$data["scheduled_date"] = $rows_2->date_time;
-			$data["received_by_mu_date"] = $data["curr_status"]->date_time;
-
-			$data["scheduled_status"] = 1;
-			$data["received_by_mu_status"] = 1;
-
-			$data["status_num"] = 2;
-		}
-		if($data["curr_status"]->status == "in process"){
-			$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			$rows_3 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'received by mu' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-
-			$data["scheduled_date"] = $rows_2->date_time;
-			$data["received_by_mu_date"] = $rows_3->date_time;
-			$data["in_process_date"] = $data["curr_status"]->date_time;
-
-			$data["scheduled_status"] = 1;
-			$data["received_by_mu_status"] = 1;
-			$data["in_process_status"] = 2;
-
-			$data["status_num"] = 3;
-		}
-		if($data["curr_status"]->status == "accepted"){
-			$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			$rows_3 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'received by mu' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			$rows_4 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'in process' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-
-			$data["scheduled_date"] = $rows_2->date_time;
-			$data["received_by_mu_date"] = $rows_3->date_time;
-			$data["in_process_date"] = @$row_4->date_time;
-			$data["accepted_date"] = $data["curr_status"]->date_time;
-
-			$data["scheduled_status"] = 1;
-			$data["received_by_mu_status"] = 1;
-			$data["in_process_status"] = 1;
-			$data["accepted_status"] = 2;
-
-			$data["status_num"] = 4;
-		}
-		if($data["curr_status"]->status == "mandate active" || $data["curr_status"]->status == "rejected"){
-			$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			$rows_3 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'received by mu' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			$rows_4 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'in process' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-			$rows_5 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'accepted' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
-
-			$data["scheduled_date"] = $rows_2->date_time;
-			$data["received_by_mu_date"] = $rows_3->date_time;
-			$data["in_process_date"] = $row_4->date_time;
-			$data["accepted_date"] = $row_5->date_time;
-			$data["active_date"] = $data["curr_status"]->date_time;
-
-			$data["scheduled_status"] = 1;
-			$data["received_by_mu_status"] = 1;
-			$data["in_process_status"] = 1;
-			$data["accepted_status"] = 1;
-			if($data["curr_status"]->status == "mandate active"){
-				$data["active_status"] = 1;
-			}else{
-				$data["reject_remark"] = $data["curr_status"]->remark;
-				$data["active_status"] = 3;
+		try {
+			// $data["scheduled_status"] = 1 => successful
+			// $data["scheduled_status"] = 2 => inprogress
+			// $data["scheduled_status"] = 3 => rejected
+			if($this->session->userdata('investor_id') == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsstatus";</script>';
+				exit;
 			}
+			$data["curr_status"] = $this->db->query("select * from ecs_status where investor_id = '".$this->session->userdata('investor_id')."'")->row();
+			
+			if($data["curr_status"]->status == "scheduled" || $data["curr_status"]->status == "rescheduled" || $data["curr_status"]->status == "waiting for pickup from customer"){
+				$data["scheduled_date"] = $data["curr_status"]->date_time;
 
-			$data["status_num"] = 5;
+				$data["scheduled_status"] = 1;
+
+				$data["status_num"] = 1;
+			}
+			if($data["curr_status"]->status == "received by mu"){
+				$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				
+				$data["scheduled_date"] = $rows_2->date_time;
+				$data["received_by_mu_date"] = $data["curr_status"]->date_time;
+
+				$data["scheduled_status"] = 1;
+				$data["received_by_mu_status"] = 1;
+
+				$data["status_num"] = 2;
+			}
+			if($data["curr_status"]->status == "in process"){
+				$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				$rows_3 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'received by mu' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+
+				$data["scheduled_date"] = $rows_2->date_time;
+				$data["received_by_mu_date"] = $rows_3->date_time;
+				$data["in_process_date"] = $data["curr_status"]->date_time;
+
+				$data["scheduled_status"] = 1;
+				$data["received_by_mu_status"] = 1;
+				$data["in_process_status"] = 2;
+
+				$data["status_num"] = 3;
+			}
+			if($data["curr_status"]->status == "accepted"){
+				$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				$rows_3 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'received by mu' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				$rows_4 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'in process' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+
+				$data["scheduled_date"] = $rows_2->date_time;
+				$data["received_by_mu_date"] = $rows_3->date_time;
+				$data["in_process_date"] = @$row_4->date_time;
+				$data["accepted_date"] = $data["curr_status"]->date_time;
+
+				$data["scheduled_status"] = 1;
+				$data["received_by_mu_status"] = 1;
+				$data["in_process_status"] = 1;
+				$data["accepted_status"] = 2;
+
+				$data["status_num"] = 4;
+			}
+			if($data["curr_status"]->status == "mandate active" || $data["curr_status"]->status == "rejected"){
+				$rows_2 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where (status = 'scheduled' or status = 'rescheduled') and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				$rows_3 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'received by mu' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				$rows_4 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'in process' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+				$rows_5 = $this->db->query("select * from ecs_schedule_status_history where date_time = (select max(date_time) as date_time from ecs_schedule_status_history where status = 'accepted' and investor_id = '".$this->session->userdata('investor_id')."')")->row();
+
+				$data["scheduled_date"] = $rows_2->date_time;
+				$data["received_by_mu_date"] = $rows_3->date_time;
+				$data["in_process_date"] = $row_4->date_time;
+				$data["accepted_date"] = $row_5->date_time;
+				$data["active_date"] = $data["curr_status"]->date_time;
+
+				$data["scheduled_status"] = 1;
+				$data["received_by_mu_status"] = 1;
+				$data["in_process_status"] = 1;
+				$data["accepted_status"] = 1;
+				if($data["curr_status"]->status == "mandate active"){
+					$data["active_status"] = 1;
+				}else{
+					$data["reject_remark"] = $data["curr_status"]->remark;
+					$data["active_status"] = 3;
+				}
+
+				$data["status_num"] = 5;
+			}
+			$this->load->view("ecstrack", $data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
-		$this->load->view("ecstrack", $data);
 	}
 
 	public function show_all_data(){
-		$investor_id = $this->session->userdata('investor_id');
-		$this->db->select('sh.*,st.status');
-		$this->db->from('ecs_schedules sh');
-		$this->db->join('ecs_status st','sh.investor_id=st.investor_id');
-		$this->db->where(array('sh.investor_id' => $investor_id));
-		$data['all_user_data'] = $this->db->get()->result();
-		$this->load->view("ecstrack", $data);
+		try {
+			$investor_id = $this->session->userdata('investor_id');
+			$this->db->select('sh.*,st.status');
+			$this->db->from('ecs_schedules sh');
+			$this->db->join('ecs_status st','sh.investor_id=st.investor_id');
+			$this->db->where(array('sh.investor_id' => $investor_id));
+			$data['all_user_data'] = $this->db->get()->result();
+			$this->load->view("ecstrack", $data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}		
 	}
 	
 	public function save_couriour(){
-		$user_email = $this->session->userdata('investor_email');
-		$investor_id = $this->session->userdata('investor_id');
-		$data = array(
-			'investor_id' => $investor_id,
-			'status'      => 'courier myself',
-			'updated_by'  => 'self'
-		);
-		$this->db->where("investor_id",$investor_id);
-		$user_result = $this->db->get("ecs_status")->row();
-		if($user_result){
+		try {
+			$user_email = $this->session->userdata('investor_email');
+			$investor_id = $this->session->userdata('investor_id');
+			$data = array(
+				'investor_id' => $investor_id,
+				'status'      => 'courier myself',
+				'updated_by'  => 'self'
+			);
 			$this->db->where("investor_id",$investor_id);
-			$result = $this->db->update("ecs_status",$data);
+			$user_result = $this->db->get("ecs_status")->row();
+			if($user_result){
+				$this->db->where("investor_id",$investor_id);
+				$result = $this->db->update("ecs_status",$data);
 
-			// Send Email
-			$this->send_email($investor_id, 'courier myself');
-			// Send SMS
-			$this->send_sms($investor_id, 'courier myself');
-		if($result){
-			echo "successfully updated";
-			exit;
-		}
-		}else{
-			$result = $this->db->insert("ecs_status",$data);
-			if($result){
 				// Send Email
 				$this->send_email($investor_id, 'courier myself');
 				// Send SMS
 				$this->send_sms($investor_id, 'courier myself');
-				echo "successfully inserted";
+			if($result){
+				echo "successfully updated";
 				exit;
 			}
+			}else{
+				$result = $this->db->insert("ecs_status",$data);
+				if($result){
+					// Send Email
+					$this->send_email($investor_id, 'courier myself');
+					// Send SMS
+					$this->send_sms($investor_id, 'courier myself');
+					echo "successfully inserted";
+					exit;
+				}
+			}
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
-			
-				
 	}
 	
 	public function pincode($city_pin=""){
-		$data['pin'] = $city_pin;
-		$data['redirect_from'] = $this->input->post("redirect_from");
-		$this->load->view("picode",$data);
+		try {
+			$data['pin'] = $city_pin;
+			$data['redirect_from'] = $this->input->post("redirect_from");
+			$this->load->view("picode",$data);
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
+		}
 	}
 	
 	public function piccheck(){
-		$email = $this->input->post("email");
-		$this->db->where("myUniverseEmailId",$email);
-		$user_data = $this->db->get("ecs_investors")->row();
-		$this->db->where("email_id",$email);
-		$user_email = $this->db->get("ecs_schedules")->row();
-		$pin = $this->input->post("pin");
-		$this->db->where("pincode",$pin);
-		$pin_codes = $this->db->get("ecs_pincodes")->row();
-		if(@$pin_codes){
-			$data = $pin_codes;
-			$city = $data->city;
-			$state = $data->state;
+		try {
+			$email = $this->input->post("email");
+			$this->db->where("myUniverseEmailId",$email);
+			$user_data = $this->db->get("ecs_investors")->row();
+			$this->db->where("email_id",$email);
+			$user_email = $this->db->get("ecs_schedules")->row();
+			$pin = $this->input->post("pin");
+			$this->db->where("pincode",$pin);
+			$pin_codes = $this->db->get("ecs_pincodes")->row();
+			if(@$pin_codes){
+				$data = $pin_codes;
+				$city = $data->city;
+				$state = $data->state;
+			}
+			if($user_data && $pin_codes){
+				echo json_encode(array("alert" =>"go ahead", "city" => $city, "state" => $state));
+				exit;
+			}
+			if(!$user_data){
+				echo json_encode(array("alert" =>"not get email"));
+				exit;
+			}
+			if(!$pin_codes){
+				echo json_encode(array("alert" =>"not get pin"));
+				exit;
+			}
+		} catch (Exception $e) {
+			$this->log_error(0, $e->getMessage());
 		}
-		if($user_data && $pin_codes){
-			echo json_encode(array("alert" =>"go ahead", "city" => $city, "state" => $state));
-			exit;
-		}
-		if(!$user_data){
-			echo json_encode(array("alert" =>"not get email"));
-			exit;
-		}
-		if(!$pin_codes){
-			echo json_encode(array("alert" =>"not get pin"));
-			exit;
-			
-		}
-		
 	}
 		
 	public function save_schedule(){
@@ -529,6 +628,7 @@ class Home extends CI_Controller {
 				}
 			}catch (Exception $e){
 				echo json_encode(array("status" => "error", "message" => $e->getMessage()));
+				$this->log_error(0, $e->getMessage());
 			}
 		}
 		
@@ -554,90 +654,94 @@ class Home extends CI_Controller {
 			echo json_encode(array("status" => "success", "message" => "Re Scheduled."));
 		} catch (Exception $e) {
 			echo json_encode(array("status" => "error", "message" => $e->getMessage()));
+			$this->log_error(0, $e->getMessage());
 		}
 	}
 	
 	private function send_email($investor_id, $new_status){
-		$this->db->where("invuser_id", $investor_id);
-		$data["investor_details"] = $this->db->get("ecs_investors")->row();
-		$this->load->library('pdf');
-		$this->pdf->set_base_path(realpath(FCPATH));
-		$this->pdf->load_view('sample', $data);
-		$filename = date("Y-m-d-h-i-s-").$investor_id;
-		$this->pdf->render();
-		$output = $this->pdf->output();
-		file_put_contents("assets/csv/".$filename.".pdf", $output);
+		try {
+			$this->db->where("invuser_id", $investor_id);
+			$data["investor_details"] = $this->db->get("ecs_investors")->row();
+			$this->load->library('pdf');
+			$this->pdf->set_base_path(realpath(FCPATH));
+			$this->pdf->load_view('sample', $data);
+			$filename = date("Y-m-d-h-i-s-").$investor_id;
+			$this->pdf->render();
+			$output = $this->pdf->output();
+			file_put_contents("assets/csv/".$filename.".pdf", $output);
 
-		$this->db->where("invuser_id", $investor_id);
-		$investor = $this->db->get("ecs_investors")->row();
+			$this->db->where("invuser_id", $investor_id);
+			$investor = $this->db->get("ecs_investors")->row();
 
-		$data["investor_data"] = $investor;
+			$data["investor_data"] = $investor;
 
-		$this->db->where("investor_id", $investor_id);
-		$data["investor_address"] = $this->db->get("ecs_schedules")->row();
+			$this->db->where("investor_id", $investor_id);
+			$data["investor_address"] = $this->db->get("ecs_schedules")->row();
 
-		$txt = $this->message_selector(urldecode($new_status));
+			$txt = $this->message_selector(urldecode($new_status));
 
-		if($txt == ""){
-			return 0;
+			if($txt == ""){
+				return 0;
+			}
+
+			$this->load->library('email');
+			$config['protocol']     = 'smtp';
+			$config['smtp_host']    = 'smtp.falconide.com';
+			$config['smtp_port']    = '25';
+			$config['smtp_timeout'] = '7';
+			$config['smtp_user']    = 'myuniverse';
+			$config['smtp_pass']    = 'Myuni@2015';
+
+			$config['charset']      = 'utf-8';
+			$config['newline']      = "\r\n";
+			$config['mailtype']     = 'html'; // or html
+			$config['validation']   = TRUE; // bool whether to validate email or not
+
+	        $this->email->initialize($config);
+
+	        $this->email->from('EcsMandate@myuniverse.co.in', 'MyUniverse ECS Mandate');
+	        // $this->email->to("Harry.Cheese@gmail.com");
+	        $this->email->to(@$investor->myUniverseEmailId);
+
+	        $this->email->subject('ECS Mandate');
+	        // $this->email->message($txt);
+	        $this->email->message($this->load->view($txt, $data, true));
+	        $this->email->attach("assets/csv/".$filename.".pdf");
+
+	        @$this->email->send();
+	        @unlink($filename.".pdf");
+		} catch (Exception $e) {
+			$this->log_error(1, $e->getMessage());
 		}
-
-		$this->load->library('email');
-		$config['protocol']     = 'smtp';
-		$config['smtp_host']    = 'smtp.falconide.com';
-		$config['smtp_port']    = '25';
-		$config['smtp_timeout'] = '7';
-		$config['smtp_user']    = 'myuniverse';
-		$config['smtp_pass']    = 'Myuni@2015';
-
-		$config['charset']      = 'utf-8';
-		$config['newline']      = "\r\n";
-		$config['mailtype']     = 'html'; // or html
-		$config['validation']   = TRUE; // bool whether to validate email or not
-
-        $this->email->initialize($config);
-
-        $this->email->from('EcsMandate@myuniverse.co.in', 'MyUniverse ECS Mandate');
-        // $this->email->to("Harry.Cheese@gmail.com");
-        $this->email->to(@$investor->myUniverseEmailId);
-
-        $this->email->subject('ECS Mandate');
-        // $this->email->message($txt);
-        $this->email->message($this->load->view($txt, $data, true));
-        $this->email->attach("assets/csv/".$filename.".pdf");
-
-        try {
-        	@$this->email->send();
-        	@unlink($filename.".pdf");
-        } catch (Exception $e) {
-        	
-        }
-        
 
 		// echo $this->email->print_debugger();
 	}
 
 	private function send_sms($investor_id, $new_status){
-		$this->db->where("invuser_id", $investor_id);
-		$investor = $this->db->get("ecs_investors")->row();
+		try {
+			$this->db->where("invuser_id", $investor_id);
+			$investor = $this->db->get("ecs_investors")->row();
 
-		if($investor->mobileno != "" && strlen($investor->mobileno) == 10){
-			$new_status = rawurldecode($new_status);
-			
-			$txt = rawurlencode($this->sms_selector($investor_id, $new_status));
-			$url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=".$investor->mobileno."&text=".$txt;
-			// $url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=9930929091&text=".$txt;
-			// $url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=8976348188&text=".$txt;
-			
-			$agent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)";
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL,$url);
-			curl_setopt($ch, CURLOPT_USERAGENT, $agent);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-			$returned = curl_exec($ch);
+			if($investor->mobileno != "" && strlen($investor->mobileno) == 10){
+				$new_status = rawurldecode($new_status);
+				
+				$txt = rawurlencode($this->sms_selector($investor_id, $new_status));
+				$url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=".$investor->mobileno."&text=".$txt;
+				// $url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=9930929091&text=".$txt;
+				// $url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=8976348188&text=".$txt;
+				
+				$agent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)";
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL,$url);
+				curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+				$returned = curl_exec($ch);
+			}
+		} catch (Exception $e) {
+			$this->log_error(2, $e->getMessage());
 		}
 	}
 
@@ -821,92 +925,97 @@ class Home extends CI_Controller {
 	}
 
 	public function index(){
-		// $this->session->set_userdata('investor_id', 'ABMMU0008199');
-		// $this->session->set_userdata('email_id', 'easy7@tcs.com');
-		// redirect("home/land");
+		try {
+			// $this->session->set_userdata('investor_id', 'ABMMU0008199');
+			// $this->session->set_userdata('email_id', 'easy7@tcs.com');
+			// redirect("home/land");
+			
+			if($this->input->post("SAMLResponse") == ""){
+				echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
+				exit;
+			}
+			$response = $this->input->post("SAMLResponse");
+
+			$decoded = base64_decode($response);
+
+			$xml = simplexml_load_string($decoded);
+			$json = json_encode($xml);
+			$array = json_decode($json,TRUE);
+
+			$crypted = explode(":", $array["Assertion"]["AttributeStatement"]["Attribute"]["AttributeValue"])[0];
+			$cryp_decode = base64_decode($crypted);
+
+			$p12cert = array();
+			$fp=fopen("assets/keys/myp12file.p12","r");
+			$c=fread($fp,8192);
+			fclose($fp);
+
+			if (openssl_pkcs12_read($c, $p12cert, 'NBCore') ){
+				$pkey = $p12cert['pkey'];  //private key
+			    $cert = $p12cert['cert'];  //public key
+
+			    if(openssl_private_decrypt($cryp_decode, $decrypted, $pkey)){
+			    	// Decryption success.
+			    }else{
+			    	// Unable to Decrypt.
+			    	while ($msg = openssl_error_string())
+			    		echo $msg . "<br />";
+			    	exit;
+			    }
+			}
+
+			// AES Dec.
+			$ciphertext_base64 = explode(":", $array["Assertion"]["AttributeStatement"]["Attribute"]["AttributeValue"])[1];
+
+			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
+			$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+			$ciphertext_dec = base64_decode($ciphertext_base64);
+			$iv_dec = substr($ciphertext_dec, 0, $iv_size);
+			$ciphertext_dec = substr($ciphertext_dec, $iv_size);
+			$plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $decrypted, $ciphertext_dec, MCRYPT_MODE_ECB, $iv_dec);
+			// print_r($plaintext_dec);
+			// exit;
+
+			$status = $this->get_string_between($plaintext_dec, "<Status>", "</Status>");
+			$originator = $this->get_string_between($plaintext_dec, "<ORIGINATOR>", "</ORIGINATOR>");
+			$inv_id = $this->get_string_between($plaintext_dec, "<INVESTORID>", "</INVESTORID>");
+			$email_id = $this->get_string_between($plaintext_dec, "<EMAIL>", "</EMAIL>");
+
+			$this->session->set_userdata('investor_id', $inv_id);
+			$this->session->set_userdata('email_id', $email_id);
+
+			$this->db->where("invuser_id", $this->session->userdata("investor_id"));
+			$investor_data = $this->db->get("ecs_investors")->row();
+			$this->session->set_userdata("investor_name", $investor_data->name);
+
+			redirect(base_url()."home");
+			// echo "Status: ".$status;
+			// echo "<br>";
+			// echo "Originator: ".$originator;
+			// echo "<br>";
+			// echo "Inv ID: ".$inv_id;
+			// echo "<br>";
+			// echo "Email ID: ".$email_id;
+			// exit;
+
+			// $name = $this->get_string_between($plaintext_dec, "<NAME>", "</NAME>");
+			// $email_id = $this->get_string_between($plaintext_dec, "<EMAILID>", "</EMAILID>");
+			// $pan = $this->get_string_between($plaintext_dec, "<PAN_NUM>", "</PAN_NUM>");
+			// $investor_id = $this->get_string_between($plaintext_dec, "<INVESTOR_ID>", "</INVESTOR_ID>");
+			// $dob = $this->get_string_between($plaintext_dec, "<DOB>", "</DOB>");
+
+			// echo "Name: ".$name;
+			// echo "<br>";
+			// echo "Email ID: ".$email_id;
+			// echo "<br>";
+			// echo "PAN No.: ".$pan;
+			// echo "<br>";
+			// echo "Investor ID: ".$investor_id;
+			// echo "<br>";
+			// echo "DOB: ".$dob;
+		} catch (Exception $e) {
+			$this->log_error(3, $e->getMessage());
+		}
 		
-		if($this->input->post("SAMLResponse") == ""){
-			echo '<script>window.location.href = "https://stg.adityabirlamoneyuniverse.com/signin?target=ecsmandate";</script>';
-			exit;
-		}
-		$response = $this->input->post("SAMLResponse");
-
-		$decoded = base64_decode($response);
-
-		$xml = simplexml_load_string($decoded);
-		$json = json_encode($xml);
-		$array = json_decode($json,TRUE);
-
-		$crypted = explode(":", $array["Assertion"]["AttributeStatement"]["Attribute"]["AttributeValue"])[0];
-		$cryp_decode = base64_decode($crypted);
-
-		$p12cert = array();
-		$fp=fopen("assets/keys/myp12file.p12","r");
-		$c=fread($fp,8192);
-		fclose($fp);
-
-		if (openssl_pkcs12_read($c, $p12cert, 'NBCore') ){
-			$pkey = $p12cert['pkey'];  //private key
-		    $cert = $p12cert['cert'];  //public key
-
-		    if(openssl_private_decrypt($cryp_decode, $decrypted, $pkey)){
-		    	// Decryption success.
-		    }else{
-		    	// Unable to Decrypt.
-		    	while ($msg = openssl_error_string())
-		    		echo $msg . "<br />";
-		    	exit;
-		    }
-		}
-
-		// AES Dec.
-		$ciphertext_base64 = explode(":", $array["Assertion"]["AttributeStatement"]["Attribute"]["AttributeValue"])[1];
-
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
-		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-		$ciphertext_dec = base64_decode($ciphertext_base64);
-		$iv_dec = substr($ciphertext_dec, 0, $iv_size);
-		$ciphertext_dec = substr($ciphertext_dec, $iv_size);
-		$plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $decrypted, $ciphertext_dec, MCRYPT_MODE_ECB, $iv_dec);
-		// print_r($plaintext_dec);
-		// exit;
-
-		$status = $this->get_string_between($plaintext_dec, "<Status>", "</Status>");
-		$originator = $this->get_string_between($plaintext_dec, "<ORIGINATOR>", "</ORIGINATOR>");
-		$inv_id = $this->get_string_between($plaintext_dec, "<INVESTORID>", "</INVESTORID>");
-		$email_id = $this->get_string_between($plaintext_dec, "<EMAIL>", "</EMAIL>");
-
-		$this->session->set_userdata('investor_id', $inv_id);
-		$this->session->set_userdata('email_id', $email_id);
-
-		$this->db->where("invuser_id", $this->session->userdata("investor_id"));
-		$investor_data = $this->db->get("ecs_investors")->row();
-		$this->session->set_userdata("investor_name", $investor_data->name);
-
-		redirect("home/land");
-		// echo "Status: ".$status;
-		// echo "<br>";
-		// echo "Originator: ".$originator;
-		// echo "<br>";
-		// echo "Inv ID: ".$inv_id;
-		// echo "<br>";
-		// echo "Email ID: ".$email_id;
-		// exit;
-
-		// $name = $this->get_string_between($plaintext_dec, "<NAME>", "</NAME>");
-		// $email_id = $this->get_string_between($plaintext_dec, "<EMAILID>", "</EMAILID>");
-		// $pan = $this->get_string_between($plaintext_dec, "<PAN_NUM>", "</PAN_NUM>");
-		// $investor_id = $this->get_string_between($plaintext_dec, "<INVESTOR_ID>", "</INVESTOR_ID>");
-		// $dob = $this->get_string_between($plaintext_dec, "<DOB>", "</DOB>");
-
-		// echo "Name: ".$name;
-		// echo "<br>";
-		// echo "Email ID: ".$email_id;
-		// echo "<br>";
-		// echo "PAN No.: ".$pan;
-		// echo "<br>";
-		// echo "Investor ID: ".$investor_id;
-		// echo "<br>";
-		// echo "DOB: ".$dob;
 	}
 }

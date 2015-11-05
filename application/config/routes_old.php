@@ -39,11 +39,6 @@
 */
 
 $route['default_controller'] = "home";
-$route['status'] = "home/status";
-$route['thankyou'] = "home/thankyou";
-$route['home'] = "home/land";
-$route['schedule-now'] = "home/schedule";
-$route['self-courier'] = "home/pincode";
 $route['404_override'] = '';
 
 

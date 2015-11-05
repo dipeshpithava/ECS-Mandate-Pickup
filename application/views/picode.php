@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<title></title>
+<title>Send ECS to Our Address and Get Flipkart Voucher</title>
+
+<meta name="description" content="Complete your ECS by sending ECS to our address and get rewarded with Flipkart voucher">
+<meta name="keywords" content="schedule ecs, ecs, ecs pick up, ecs courier">
+
 <link href="<?=base_url()?>assets/third_party/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?=base_url()?>assets/third_party/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -70,11 +74,11 @@ I B Patel Road, Off W.E Highway, Goregaon (East), Mumbai - 400 063 501,</p>
         <?php
         if(@$redirect_from != ""){
           ?>
-          <a href="<?=base_url()?>home/land" class="back_link">Go Back to ECS mandate Home page</a>
+          <a href="<?=base_url()?>land" class="back_link">Go Back to ECS mandate Home page</a>
           <?php
         }else{
           ?>
-          <a href="<?=base_url()?>home/schedule" class="back_link">Go Back and edit the pincode</a>
+          <a href="<?=base_url()?>schedule-now" class="back_link">Go Back and edit the pincode</a>
           <?php
         }
         ?>

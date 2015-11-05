@@ -32,31 +32,7 @@
   </style>
 </head>
 <body>
-<div class="yt-loader"></div>
-<?php include_once "logout_header.php"; ?>
-<!--header-->
-<section class="headerWrapper">
-  <section class="container">
-    <header class="header">
-      <a href="https://stg.adityabirlamoneyuniverse.com/sitepages/homepage.aspx"><div class="logo"></div></a>
-      <nav class="mobile-hide">
-        <!-- <div class="logoutRight"><a href="/Sitepages/logout.aspx">Logout</a></div> -->
-        <ul class="naviagationLink">
-          <li><a href="tel:022-61802828"><img src="<?=base_url()?>assets/third_party/images/call.png" /> 022-61802828 (10am-7pm Mon - Sat)</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div class="clear"></div>
-  </section>
-</section>
-<section class="bannerWrapper">
-  <section class="container1">
-    <div class="banner-text"> Couriering ECS mandate is now easy!<br />
-      <span class="date-panel">Schedule your ECS mandate Pick-up</span> </div>
-      <div class="paperChart"><img src="<?=base_url()?>assets/third_party/images/kite.png" /></div>
-    <div class="clear"></div>
-  </section>
-</section>
+
 
 <section class="ecs_form_main" id="txt-fnt">
      <span class="col-black">You have chosen to courier the ECS Mandate by yourself. Please send us the signed copy of ECS Mandate for Account XXXXXXXX<?=substr(trim(@$investor_data->accountNumber, " "), -3, 3)?>  of <?=@$investor_data->bankName?> within three working days to the following address:</span>
@@ -90,24 +66,7 @@
   </ul>
   <div class="clear"></div>
 </div>
-<div class="copy_right desktop-hide">Copyright © 2015 Aditya Birla Customer Services Ltd <span><a target="_blank" href="https://www.myuniverse.co.in/_layouts/prelogin/mobilelegalinfo.aspx?Mid=pp ">Privacy Policy</a> | <a target="_blank" href="https://www.mfjunction.co.in/StaticContent/terms/Terms_condition.pdf ">Terms &amp; Conditions</a></span></div>
-<footer class="mobile-hide">
-  <div class="footerCont">
-    <div class="footer-ico"><img src="<?=base_url()?>assets/third_party/images/footer_abmu_logo.png"></div>
-    <div id="footerContainer">
-      <div id="ctl00_ABMU_Footer_id_copyright" class="footer">Copyright © 2015 Aditya Birla Customer Services Ltd.| <a onclick="fnPolicies('Legal Disclaimer','id_LegalDisclaimer');" href="Javascript:void(0);">Legal Disclaimer</a> | <a onclick="fnPolicies('Privacy Policy','id_SecurityPrivacyPolicy');" href="Javascript:void(0);">Privacy Policy</a> | <a onclick="ShowTermsAndConditionAsnyc('tandc_light','tandc_fade', 'id_TACDesc','Terms And Conditions')" href="Javascript:void(0);">Terms and Conditions</a> | <a onclick="ShowInvestTermsAndConditionAsnyc('investtandc_light','investtandc_fade', 'id_InvTACDesc','Terms And Conditions')" href="javascript:void(0);">Investment Account T &amp; C</a> <span class="iadisclaimer">* Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing.</span> <span class="iadisclaimer" style="margin-bottom:0px;">* The research based investment advice &amp; reports, stock and commodity recommendations, if any, projected/ displayed on or communicated through the www.myuniverse.co.in are provided by /created by/ sourced from Aditya Birla Money Mart Ltd, Aditya Birla Money Ltd and Aditya Birla Commodities Broking Ltd, respectively and not by ABCSL, the owner of this website. For more details, please refer the legal disclaimer</span>
-        <div id="ctl00_ABMU_Footer_id_broadcastmessage">
-          <div id="id_broadcastingmessage" style="color: rgb(1, 54, 130); display: block;">Site is best viewed with Internet Explorer 11+, Firefox 30+, Chrome 30+ and Safari 5.1+ with a resolution of 1024 x 768.</div>
-        </div>
-      </div>
-    </div>
-    <!-- Footer popup Starts  here-->
-    
-    <div class="black_overlay" id="Footerfade"></div>
-    <div id="id_LegalDisclaimer" title="Legal Disclaimer" style="display:None;"></div>
-    <div id="id_SecurityPrivacyPolicy" title="Privacy Policy" style="display:None;"></div>
-  </div>
-</footer>
+
 <div id="keep_alive">
   <!--<iframe src="https://stg.adityabirlamoneyuniverse.com/sitepages/nb_keepalive.aspx"></iframe>-->
 </div>

@@ -80,14 +80,14 @@ a img {
                             </table></td>
                           <td style="text-align:left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#8f8f8f">
                               <tr>
-                                <td width="7%">2.</td>
-                                <td width="89%">Second Document</td>
+                                <!-- <td width="7%">2.</td>
+                                <td width="89%">Second Document</td> -->
                               </tr>
                             </table></td>
                           <td style="text-align:left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#8f8f8f">
                               <tr>
-                                <td width="7%">3.</td>
-                                <td width="89%">Third Document</td>
+                                <!-- <td width="7%">3.</td>
+                                <td width="89%">Third Document</td> -->
                               </tr>
                             </table></td>
                         </tr>

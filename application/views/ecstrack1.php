@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title></title>
+<title>Check Status of Your ECS Mandate</title>
+
+<meta name="description" content="Check the status of your ECS mandate here">
+<meta name="keywords" content="schedule ecs, ecs, ecs pick up, ecs courier">
+
 <link href="<?=base_url()?>assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/third_party/css/sweetalert.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -248,7 +252,7 @@ if(count($all_status) > 0){
           <div class="bank ecssprite"></div>
           <div class="statusinfo">
             <?php
-                if($accepted != ""){
+                if($accepted != "" || $rejected != ""){
                   $date_4 = new DateTime(@$accepted);
                   $dt4 = $date_4->format('M j, Y');
                 }else{

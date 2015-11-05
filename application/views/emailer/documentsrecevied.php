@@ -53,7 +53,8 @@ a img {
                     <td height="20"></td>
                   </tr>
                   <tr>
-                    <td height="20">You can check the status of your ECS Mandate here, <a href="#" style="color:#0d6ca2">Track Madandate Now</a></td>
+                    <td height="20">You can check the status of your ECS Mandate here, <a href="#" style="color:#0d6ca2">Check your ECS Mandate 
+</a></td>
                   </tr>
                 </table></td>
             </tr>

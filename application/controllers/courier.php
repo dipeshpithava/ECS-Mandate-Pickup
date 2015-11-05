@@ -300,6 +300,11 @@ class Courier extends CI_Controller {
 						$this->db->insert("ecs_upload_excel", $upload_pickup);
 					}
 					
+					// Send Email
+					$this->send_email($investor_id, $new_status);
+					// Send SMS
+					$this->send_sms($investor_id, $new_status);
+					
 			}
 			//end
 			$this->load->view("admin/courier_success");
@@ -384,5 +389,195 @@ class Courier extends CI_Controller {
 		}
 		$data["all_holiday"] = $this->db->get("ecs_holiday_list")->result();
 		$this->load->view('admin/holiday_list',$data);
+	}
+
+	private function send_email($investor_id, $new_status){
+		try {
+			$this->db->where("invuser_id", $investor_id);
+			$data["investor_details"] = $this->db->get("ecs_investors")->row();
+			$this->load->library('pdf');
+			$this->pdf->set_base_path(realpath(FCPATH));
+			$this->pdf->load_view('sample', $data);
+			$filename = date("Y-m-d-h-i-s-").$investor_id;
+			$this->pdf->render();
+			$output = $this->pdf->output();
+			file_put_contents("assets/csv/".$filename.".pdf", $output);
+
+			$this->db->where("invuser_id", $investor_id);
+			$investor = $this->db->get("ecs_investors")->row();
+
+			$data["investor_data"] = $investor;
+
+			$this->db->where("investor_id", $investor_id);
+			$data["investor_address"] = $this->db->get("ecs_schedules")->row();
+
+			$txt = $this->message_selector(urldecode($new_status));
+
+			if($txt == ""){
+				return 0;
+			}
+
+			$this->load->library('email');
+			$config['protocol']     = 'smtp';
+			$config['smtp_host']    = 'smtp.falconide.com';
+			$config['smtp_port']    = '25';
+			$config['smtp_timeout'] = '7';
+			$config['smtp_user']    = 'myuniverse';
+			$config['smtp_pass']    = 'Myuni@2015';
+
+			$config['charset']      = 'utf-8';
+			$config['newline']      = "\r\n";
+			$config['mailtype']     = 'html'; // or html
+			$config['validation']   = TRUE; // bool whether to validate email or not
+
+	        $this->email->initialize($config);
+
+	        $this->email->from('EcsMandate@myuniverse.co.in', 'MyUniverse ECS Mandate');
+	        // $this->email->to("Harry.Cheese@gmail.com");
+	        $this->email->to(@$investor->myUniverseEmailId);
+
+	        $this->email->subject('ECS Mandate');
+	        // $this->email->message($txt);
+	        $this->email->message($this->load->view($txt, $data, true));
+	        $this->email->attach("assets/csv/".$filename.".pdf");
+
+	        @$this->email->send();
+	        @unlink($filename.".pdf");
+		} catch (Exception $e) {
+			$this->log_error(1, $e->getMessage());
+		}
+		// echo $this->email->print_debugger();
+	}
+
+	private function send_sms($investor_id, $new_status){
+		try {
+			$this->db->where("invuser_id", $investor_id);
+			$investor = $this->db->get("ecs_investors")->row();
+
+			if($investor->mobileno != "" && strlen($investor->mobileno) == 10){
+				$new_status = rawurldecode($new_status);
+				
+				$txt = rawurlencode($this->sms_selector($investor_id, $new_status));
+				$url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=".$investor->mobileno."&text=".$txt;
+				// $url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=9930929091&text=".$txt;
+				// $url = "https://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=342866&username=9833538989&password=djwpm&To=8976348188&text=".$txt;
+				
+				$agent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)";
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL,$url);
+				curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+				$returned = curl_exec($ch);
+			}
+		} catch (Exception $e) {
+			$this->log_error(2, $e->getMessage());
+		}
+	}
+
+	private function sms_selector($investor_id, $new_status){
+		$this->db->where("invuser_id", $investor_id);
+		$investor_detail = $this->db->get("ecs_investors")->row();
+
+		$this->db->where("investor_id", $investor_id);
+		$schedule_detail = $this->db->get("ecs_schedules")->row();
+
+		switch ($new_status) {
+			case 'courier myself':
+				$txt = "";
+				break;
+
+			case 'unscheduled':
+				$txt = "";
+				break;
+
+			case 'scheduled':
+				$txt = "Dear customer, we have received your request for document pickup for ".date("d-m-Y", strtotime($schedule_detail->date_of_pickup))." ".$schedule_detail->time_of_pickup." from your ".$schedule_detail->location_type." at ".$schedule_detail->city.". Please keep your documents readily available to be handed over to our representative.";
+				break;
+
+			case 'rescheduled':
+				$txt = "Dear customer, we have received your request for document pickup for ".date("d-m-Y", strtotime($schedule_detail->date_of_pickup))." ".$schedule_detail->time_of_pickup." from your ".$schedule_detail->location_type." at ".$schedule_detail->city.". Please keep your documents readily available to be handed over to our representative.";
+				break;
+
+			case 'waiting for pickup from customer':
+				$txt = "Dear Customer, our representative will arrive at your ".$schedule_detail->location_type." at ".$schedule_detail->city." for document pickup. Request you to download, print and sign the documents received in your email. Helpdesk 022-61802828";
+				break;
+
+			case 'waiting for delivery to mu':
+				$txt = "";
+				break;
+
+			case 'received by mu':
+				$txt = "";
+				break;
+
+			case 'in process':
+				$txt = "";
+				break;
+
+			case 'rejected':
+				$txt = "";
+				break;
+
+			case 'accepted':
+				$txt = "Dear Customer, your mandate has been accepted by MyUniverse and is sent to ".$investor_detail->bankName." for their acceptance. The Mandate will be active after we receive the Bank’s confirmation.";
+				break;
+
+			case 'mandate active':
+				$txt = "Congratulations!! Your mandate for ".$investor_detail->bankName." is active. SIP can now be processed on this mandate.";
+				break;
+			}
+			return $txt;
+	}
+
+	private function message_selector($new_status){
+		switch ($new_status) {
+			case 'courier myself':
+				$txt = "";
+				break;
+
+			case 'unscheduled':
+				$txt = "";
+				break;
+
+			case 'scheduled':
+				$txt = "emailer/appointmentrec";
+				break;
+
+			case 'rescheduled':
+				$txt = "emailer/appointmentrec";
+				break;
+
+			case 'waiting for pickup from customer':
+				$txt = "emailer/outforpickup";
+				break;
+
+			case 'waiting for delivery to mu':
+				$txt = "emailer/pickupsuccess";
+				break;
+
+			case 'received by mu':
+				$txt = "emailer/documentsrecevied";
+				break;
+
+			case 'in process':
+				$txt = "";
+				break;
+
+			case 'rejected':
+				$txt = "emailer/rejected";
+				break;
+
+			case 'accepted':
+				$txt = "";
+				break;
+
+			case 'mandate active':
+				$txt = "";
+				break;
+			}
+		return $txt;
 	}
 }

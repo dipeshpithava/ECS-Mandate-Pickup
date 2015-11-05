@@ -2,7 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<title></title>
+<title>Now You Can Schedule Your ECS Pickup Online</title>
+
+<meta name="description" content="Complete last step to get your account investment ready, it is rewarding too. Schedule your ECS now">
+<meta name="keywords" content="schedule ecs, ecs, ecs pick up, ecs courier">
+
+
 <link href="<?=base_url()?>assets/css/style2.css?v=321" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/third_party/css/sweetalert.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -93,7 +98,7 @@ pick for me. </div>
     <div id="id_SecurityPrivacyPolicy" title="Privacy Policy" style="display:None;"></div>
   </div>
 </footer>
-<form action="<?=base_url()?>home/pincode" method="post" id="frm_pincode">
+<form action="<?=base_url()?>self-courier" method="post" id="frm_pincode">
 <input type="hidden" value="firstpage" name="redirect_from" />
 </form>
 <!--first page-->

@@ -26,13 +26,40 @@ class Admin extends CI_Controller {
 	public function index(){
 		redirect("admin/investors");
 	}
-	public function send_email2(){
-		// $this->db->where("invuser_id", $investor_id);
-		// $investor = $this->db->get("ecs_investors")->row();
 
-		// $txt = $this->message_selector($new_status);
+	// This is to test logs.
+	// public function test_log(){
+	// 	define("ERR_DIR_DB", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_DB.log");
+	// 	define("ERR_DIR_EMAIL", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_email.log");
+	// 	define("ERR_DIR_SMS", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_sms.log");
+	// 	define("ERR_DIR_SAML", "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/err_saml.log");
+	// 	echo error_log("Test1", 3, ERR_DIR_SAML);
+	// }
+	private function send_email2(){
+		$investor_id = "ABMMU0008203";
+		$this->db->where("invuser_id", $investor_id);
+		$data["investor_details"] = $this->db->get("ecs_investors")->row();
+		$this->load->library('pdf');
+		$this->pdf->set_base_path(realpath(FCPATH));
+		$this->pdf->load_view('sample', $data);
+		$filename = date("Y-m-d-h-i-s-").$investor_id;
+		$this->pdf->render();
+		$output = $this->pdf->output();
+		file_put_contents("assets/csv/".$filename.".pdf", $output);
 
-		$data = array();
+		$this->db->where("invuser_id", $investor_id);
+		$investor = $this->db->get("ecs_investors")->row();
+
+		$data["investor_data"] = $investor;
+
+		$this->db->where("investor_id", $investor_id);
+		$data["investor_address"] = $this->db->get("ecs_schedules")->row();
+
+		// $txt = $this->message_selector(urldecode($new_status));
+
+		// if($txt == ""){
+		// 	return 0;
+		// }
 
 		$this->load->library('email');
 		$config['protocol']     = 'smtp';
@@ -50,14 +77,20 @@ class Admin extends CI_Controller {
         $this->email->initialize($config);
 
         $this->email->from('EcsMandate@myuniverse.co.in', 'MyUniverse ECS Mandate');
-        // $this->email->to("Harry.Cheese@gmail.com");
         $this->email->to("dipeshpithava@gmail.com");
-        // $this->email->to($investor->myuniverse_email_id);
+        // $this->email->to(@$investor->myUniverseEmailId);
 
         $this->email->subject('ECS Mandate');
-        $this->email->message($this->load->view("emailer/rejected", $data, true));
+        // $this->email->message($txt);
+        $this->email->message($this->load->view("emailer/appointmentrec", $data, true));
+        $this->email->attach("assets/csv/".$filename.".pdf");
 
-        $this->email->send();
+        try {
+			@$this->email->send();
+			@unlink($filename.".pdf");        	
+        } catch (Exception $e) {
+        	
+        }
 
 		echo $this->email->print_debugger();
 	}
@@ -280,6 +313,7 @@ class Admin extends CI_Controller {
 		$this->db->join('ecs_investors inv','st.investor_id=inv.invuser_id');
 		$this->db->where(array('st.status' => 'courier myself'));
 		$data["courier_send_list"] = $this->db->get()->result();
+		$data["disabled_dates"] = $this->db->get("ecs_holiday_list")->result();
 		// select st.status as user_status, st.date_time, inv.* from ecs_schedule_status_history st inner join ecs_investors inv on st.investor_id = inv.invuser_id where st.status = 'courier myself'
 		$this->load->view('admin/courier_myself',$data);
 	}
@@ -488,17 +522,74 @@ class Admin extends CI_Controller {
 	}
 	public function ajax_change_status(){
 		try {
-			$upd_data = array(
-				"status" => strtolower($this->input->post("txt_new_status")),
-				"date_time" => date("Y-m-d H:i:s")
-			);
-			$this->db->where("investor_id", $this->input->post("txt_inv_id"));
-			$this->db->update("ecs_status", $upd_data);
-			
-			// Send Email
-			$this->send_email($this->input->post("txt_inv_id"), strtolower($this->input->post("txt_new_status")));
-			// Send SMS
-			$this->send_sms($this->input->post("txt_inv_id"), strtolower($this->input->post("txt_new_status")));
+			if(strtolower($this->input->post("txt_new_status")) == "cm received by mu"){
+				$upd_data_0 = array(
+					"status" => "waiting for pickup from customer",
+					"date_time" => date("Y-m-d H:i:s")
+				);
+				$this->db->where("investor_id", $this->input->post("txt_inv_id"));
+				$this->db->update("ecs_status", $upd_data_0);
+
+				// ecs_schedule_status_history
+
+				// error_log("waiting for pickup from customer", 3, "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/admin_test.log");
+				
+				$upd_data_1 = array(
+					"status" => "waiting for delivery to mu",
+					"date_time" => date("Y-m-d H:i:s")
+				);
+				$this->db->where("investor_id", $this->input->post("txt_inv_id"));
+				$this->db->update("ecs_status", $upd_data_1);
+
+				$this->db->where("invuser_id", $this->input->post("txt_inv_id"));
+				$inv_email = $this->db->get("ecs_investors")->row();
+
+				$upd_data_00 = array(
+					"investor_id" => $this->input->post("txt_inv_id"),
+					"email_id" => $inv_email->myUniverseEmailId,
+					"status" => "waiting for pickup from customer",
+					"updated_by" => "admin",
+					"date_time" => date("Y-m-d H:i:s")
+				);
+				$this->db->insert("ecs_schedule_status_history", $upd_data_00);
+
+				// error_log(" = waiting for delivery to mu", 3, "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/admin_test.log");
+
+				$upd_data_2 = array(
+					"status" => "received by mu",
+					"date_time" => date("Y-m-d H:i:s")
+				);
+				$this->db->where("investor_id", $this->input->post("txt_inv_id"));
+				$this->db->update("ecs_status", $upd_data_2);
+
+				$upd_data_11 = array(
+					"investor_id" => $this->input->post("txt_inv_id"),
+					"email_id" => $inv_email->myUniverseEmailId,
+					"status" => "waiting for delivery to mu",
+					"updated_by" => "admin",
+					"date_time" => date("Y-m-d H:i:s")
+				);
+				$this->db->insert("ecs_schedule_status_history", $upd_data_11);
+
+				// error_log(" = received by mu", 3, "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/admin_test.log");
+
+				// Send Email
+				$this->send_email($this->input->post("txt_inv_id"), "received by mu");
+				// Send SMS
+				$this->send_sms($this->input->post("txt_inv_id"), "received by mu");
+			}else{
+				$upd_data = array(
+					"status" => strtolower($this->input->post("txt_new_status")),
+					"date_time" => date("Y-m-d H:i:s")
+				);
+				$this->db->where("investor_id", $this->input->post("txt_inv_id"));
+				$this->db->update("ecs_status", $upd_data);
+
+				// Send Email
+				$this->send_email($this->input->post("txt_inv_id"), strtolower($this->input->post("txt_new_status")));
+				// Send SMS
+				$this->send_sms($this->input->post("txt_inv_id"), strtolower($this->input->post("txt_new_status")));
+			}
 
 			$this->output->set_content_type('application/json')->set_output(json_encode(array("status" => "success", "message" => "Status Changed.")));
 		} catch (Exception $e) {

@@ -78,14 +78,14 @@ a img {
                             </table></td>
                           <td style="text-align:left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#8f8f8f">
                               <tr>
-                                <td width="7%">2.</td>
-                                <td width="89%">Second Document</td>
+                                <!-- <td width="7%">2.</td>
+                                <td width="89%">Second Document</td> -->
                               </tr>
                             </table></td>
                           <td style="text-align:left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#8f8f8f">
                               <tr>
-                                <td width="7%">3.</td>
-                                <td width="89%">Third Document</td>
+                                <!-- <td width="7%">3.</td>
+                                <td width="89%">Third Document</td> -->
                               </tr>
                             </table></td>
                         </tr>
@@ -183,7 +183,7 @@ a img {
               <td style="text-align:center" valign="top" height="25"><img src="<?=base_url()?>assets/emailer_images/black-line.jpg" width="23" height="1"></td>
             </tr>
             <tr>
-              <td align="center" height="60" valign="top">You can re-schedule your pickup from here <a href="#" style="color:#0d6ca2">Re-schedule my pickup </a></td>
+              <td align="center" height="60" valign="top">You can re-schedule your pickup from here <a href="https://stg.adityabirlamoneyuniverse.com/schedule-ecs-pickup/" style="color:#0d6ca2">Re-schedule my pickup </a></td>
             </tr>
           </tbody>
         </table></td>
@@ -193,9 +193,9 @@ a img {
     </tr>
    <tr>
    <td>
-   <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+   <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" style="margin:0px auto;">
    <tr>
-      <td style="padding-top:0px;"><table width="600" border="0" cellspacing="0" cellpadding="0" style=" font-family:Arial, Helvetica, sans-serif; border:1px solid #b8b8b8;display:block;margin:0px auto;" bgcolor="#fff">
+      <td style="padding-top:0px;"><table width="600" border="0" cellspacing="0" cellpadding="0" align="center" style="font-family:Arial, Helvetica, sans-serif; border:1px solid #b8b8b8;margin:0px auto;text-align:center;" bgcolor="#fff">
           <tbody>
             <tr>
               <td height="25" style="text-align:center; font-size:12px; color:#444444">&nbsp;</td>

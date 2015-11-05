@@ -78,14 +78,14 @@ a img {
                             </table></td>
                           <td style="text-align:left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                               <tr>
-                                <td width="7%">2.</td>
-                                <td width="89%">Second Document</td>
+                                <!-- <td width="7%">2.</td>
+                                <td width="89%">Second Document</td> -->
                               </tr>
                             </table></td>
                           <td style="text-align:left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                               <tr>
-                                <td width="7%">3.</td>
-                                <td width="89%">Third Document</td>
+                                <!-- <td width="7%">3.</td>
+                                <td width="89%">Third Document</td> -->
                               </tr>
                             </table></td>
                         </tr>
@@ -168,7 +168,7 @@ a img {
               <td style="text-align:center" valign="top" height="25"><img src="<?=base_url()?>assets/emailer_images/black-line.jpg" width="23" height="1"></td>
             </tr>
             <tr>
-              <td align="center" height="60" valign="top">You can re-schedule your pickup from here <a href="#" style="color:#0d6ca2">Re-schedule my pickup </a></td>
+              <td align="center" height="60" valign="top">You can check status of ECS Mandate from here <a href="https://stg.adityabirlamoneyuniverse.com/schedule-ecs-pickup/" style="color:#0d6ca2">Check your ECS Mandate </a></td>
             </tr>
           </tbody>
         </table></td>

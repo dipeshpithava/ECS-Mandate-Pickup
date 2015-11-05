@@ -5,7 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<title></title>
+<title>Schedule Your ECS Pickup Delivery</title>
+
+<meta name="description" content="Schedule your ECS pickup delivery now, one of our executives will collect the document from your doorstep">
+<meta name="keywords" content="schedule ecs, ecs, ecs pick up, ecs courier">
+
 <link href="<?=base_url()?>assets/third_party/css/style.css?v=asfdsddg" rel="stylesheet" type="text/css" />
 <link href="<?=base_url()?>assets/third_party/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">

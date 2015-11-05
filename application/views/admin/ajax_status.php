@@ -34,7 +34,8 @@
 						<select name="" id="status_<?=$all_status_row->inv_usr_id?>" class="no_display status_dropdown">
 						<?php if($all_status_row->status==strtolower("courier myself")){?>
 							<option value="scheduled">scheduled</option>
-							<option value="scheduled">rescheduled</option>
+							<option value="rescheduled">rescheduled</option>
+              <option value="cm received by mu">received by mu</option>
 						<?php }else if($all_status_row->status==strtolower("scheduled")){?>
 							<option value="rescheduled">rescheduled</option>
 							<option value="waiting for pickup from customer">waiting for pickup from customer</option>
