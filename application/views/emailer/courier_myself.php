@@ -33,7 +33,7 @@ a img {
               <td style="height:6px; background-color:#c61c2c;"></td>
             </tr>
             <tr>
-              <td align="center"><img src="<?=base_url()?>assets/emailer_images/courierbg.jpg" width="600" height="181" alt="EKYC "></td>
+              <td align="center"><img src="<?=base_url()?>assets/emailer_images/courierbg2.jpg" width="600" height="181" alt="EKYC "></td>
             </tr>
             <tr>
               <td height="20"></td>
