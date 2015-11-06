@@ -786,7 +786,7 @@ class Admin extends CI_Controller {
 	public function message_selector($new_status){
 		switch ($new_status) {
 			case 'courier myself':
-				$txt = "";
+				$txt = "emailer/courier_myself";
 				break;
 
 			case 'unscheduled':

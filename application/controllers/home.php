@@ -709,7 +709,7 @@ class Home extends CI_Controller {
 	        $this->email->initialize($config);
 
 	        $this->email->from('EcsMandate@myuniverse.co.in', 'MyUniverse ECS Mandate');
-	        // $this->email->to("dipeshpithava@gmail.com");
+	        //$this->email->to("dipeshpithava@gmail.com");
 	        $this->email->to(@$investor->myUniverseEmailId);
 
 	        $this->email->subject('ECS Mandate');
