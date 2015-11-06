@@ -45,8 +45,8 @@
 </section>
 <section class="bannerWrapper firstPageBanner">
   <section class="container1">
-    <div class="banner-text"> Last step to get your account investment ready, its rewarding too.<br />
-      <span class="date-panel">Courier your ECS mandate to us , or schedule a ECS mandate pickup its simple.</span> </div>
+    <div class="banner-text"> Last step to get your account investment ready, it's rewarding too.<br />
+      <span class="date-panel">Courier your ECS mandate to us , or schedule a ECS mandate pickup it's simple.</span> </div>
       <div class="paperChart"><img src="<?=base_url()?>assets/images/kite.png" /></div>
     <div class="clear"></div>
   </section>

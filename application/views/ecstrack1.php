@@ -72,6 +72,10 @@ $courier_myself = "";
 if(count($all_status) > 0){
   foreach($all_status as $all_status_row){
     $status_heading = "";
+    if($all_status_row->status == "courier myself"){
+      $courier_myself = @$all_status_row->date_time;
+      $status_heading = "Please courier your ECS Mandate for further processing.";
+    }
     if($all_status_row->status == "scheduled" || $all_status_row->status == "rescheduled"){
       $schedule_date = @$all_status_row->date_time;
       $status_heading = "Appointment Received";
@@ -103,10 +107,6 @@ if(count($all_status) > 0){
     if($all_status_row->status == "mandate active"){
       $mandate_active = @$all_status_row->date_time;
       $status_heading = "ECS Mandate Successfully Activated";
-    }
-    if($all_status_row->status == "courier myself"){
-      $courier_myself = @$all_status_row->date_time;
-      $status_heading = "Please courier your ECS Mandate for further processing";
     }
   }
 }

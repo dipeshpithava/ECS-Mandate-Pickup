@@ -529,10 +529,6 @@ class Admin extends CI_Controller {
 				);
 				$this->db->where("investor_id", $this->input->post("txt_inv_id"));
 				$this->db->update("ecs_status", $upd_data_0);
-
-				// ecs_schedule_status_history
-
-				// error_log("waiting for pickup from customer", 3, "C:/xampp/htdocs/schedule-ecs-pickup/application/logs/admin_test.log");
 				
 				$upd_data_1 = array(
 					"status" => "waiting for delivery to mu",
@@ -578,6 +574,24 @@ class Admin extends CI_Controller {
 				// Send SMS
 				$this->send_sms($this->input->post("txt_inv_id"), "received by mu");
 			}else{
+				$this->db->where("investor_id", $this->input->post("txt_inv_id"));
+				$investor_data_schedule = $this->db->get("ecs_schedules")->result();
+				if(count($investor_data_schedule) < 1){
+					$this->db->where("investor_id", $this->input->post("txt_inv_id"));
+					$current_status = $this->db->get("ecs_status")->row();
+
+					$this->db->where("invuser_id", $this->input->post("txt_inv_id"));
+					$inv_email_new = $this->db->get("ecs_investors")->row();
+
+					$upd_data_new = array(
+						"investor_id" => $this->input->post("txt_inv_id"),
+						"email_id" => $inv_email_new->myUniverseEmailId,
+						"status" => @$current_status->status,
+						"updated_by" => "admin",
+						"date_time" => date("Y-m-d H:i:s")
+					);
+					$this->db->insert("ecs_schedule_status_history", $upd_data_new);
+				}
 				$upd_data = array(
 					"status" => strtolower($this->input->post("txt_new_status")),
 					"date_time" => date("Y-m-d H:i:s")

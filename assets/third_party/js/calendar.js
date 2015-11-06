@@ -56,7 +56,7 @@ jQuery(document).ready(function ($) {
 
 $('#datepicker').datepicker({
     beforeShowDay: disabledays,  
-    dateFormat: "yy/mm/dd",
+    dateFormat: "dd/mm/yy",
     minDate: 1,
 	maxDate: '1m', 
 	changeMonth: true

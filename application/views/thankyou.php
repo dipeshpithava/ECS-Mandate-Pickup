@@ -51,8 +51,8 @@
 </section>
 <section class="bannerWrapper">
   <section class="container1">
-    <div class="banner-text"> Couriering ECS mandate is now easy!<br />
-      <span class="date-panel">Schedule your ECS mandate Pick-up</span> </div>
+    <div class="banner-text"> Thank You!<br />
+      <span class="date-panel"></span> </div>
       <div class="paperChart"><img src="<?=base_url()?>assets/third_party/images/kite.png" /></div>
     <div class="clear"></div>
   </section>

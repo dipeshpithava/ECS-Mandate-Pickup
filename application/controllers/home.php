@@ -186,7 +186,8 @@ class Home extends CI_Controller {
 			// exit;
 			$user_status = @$data["all_status"]['0']->status==""?"unscheduled":@$data["all_status"]['0']->status;
 			if($user_status=="unscheduled" || $user_status=="scheduled" || $user_status=="rescheduled" || count($data["all_status"]) < 1){
-				$this->load->view("firstpage");
+				// $this->load->view("firstpage");
+				$this->load->view("firstpage_coming_soon");
 			}else{
 				redirect(base_url()."status");
 			}
@@ -356,7 +357,8 @@ class Home extends CI_Controller {
 
 			$data["all_status"] = $this->db->query("select * from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and id > (select max(id) as id from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' and status = 'rejected')")->result();
 			if(count($data["all_status"]) < 1){
-				$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+				// $data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time asc")->result();
+				$data["all_status"] = $this->db->query("select status, max(date_time) as date_time from ecs_schedule_status_history where investor_id = '".$this->session->userdata('investor_id')."' group by status order by date_time desc")->result();
 			}
 			if(count($data["all_status"]) < 1){
 				redirect(base_url()."schedule-now");
@@ -514,9 +516,16 @@ class Home extends CI_Controller {
 	
 	public function pincode($city_pin=""){
 		try {
-			$data['pin'] = $city_pin;
-			$data['redirect_from'] = $this->input->post("redirect_from");
-			$this->load->view("picode",$data);
+			$investor_id = $this->session->userdata('investor_id');
+			$this->db->where("investor_id",$investor_id);
+			$data["all_status"] = $this->db->get("ecs_status")->row();
+			if(@$data["all_status"]->status == "courier myself"){
+				redirect(base_url()."status");
+			}else{
+				$data['pin'] = $city_pin;
+				$data['redirect_from'] = $this->input->post("redirect_from");
+				$this->load->view("picode",$data);
+			}
 		} catch (Exception $e) {
 			$this->log_error(0, $e->getMessage());
 		}
@@ -700,7 +709,7 @@ class Home extends CI_Controller {
 	        $this->email->initialize($config);
 
 	        $this->email->from('EcsMandate@myuniverse.co.in', 'MyUniverse ECS Mandate');
-	        // $this->email->to("Harry.Cheese@gmail.com");
+	        // $this->email->to("dipeshpithava@gmail.com");
 	        $this->email->to(@$investor->myUniverseEmailId);
 
 	        $this->email->subject('ECS Mandate');
@@ -819,7 +828,7 @@ class Home extends CI_Controller {
 	private function message_selector($new_status){
 		switch ($new_status) {
 			case 'courier myself':
-				$txt = "";
+				$txt = "emailer/courier_myself";
 				break;
 
 			case 'unscheduled':

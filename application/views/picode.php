@@ -198,7 +198,7 @@ $(document).ready(function(){
 					pass:""
 					},
 					success:function(akhi){
-            location.assign("<?=base_url()?>home/thankyou");
+            location.assign("<?=base_url()?>thankyou");
 						// $(".back_link").html("");
 						// $("#confirm_msg").html("You have confirmed your order");
 						//alert(akhi);

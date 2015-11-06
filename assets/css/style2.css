@@ -654,3 +654,12 @@ font-size: 12px;
 .ecs_inner p{ width:90%;}
 .ecs_form_main p.big_text{ font-size:13px; line-height:16px;}
 }
+
+
+.courierSchedule .textBox { color:#cfcfcf}
+.courierSchedule label.css-label {    background: url(../images/radioBig_new.png) 0 -112px!important;}
+.courierSchedule .icn02 {background: url(../images/sprite-radio_new.png) -157px -124px;}
+.disableBoxN { cursor:not-allowed!important}
+.comingSoon  { width:75px; margin:auto; background:#f26b1a; color:#fff; font-size:11px; padding:2px 5px;   }
+.lastBox {  padding:10px 0 10px 0}
+.lastBox {  padding:10px 0 15px 0}
